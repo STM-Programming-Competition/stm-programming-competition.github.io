@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="STM 编程大赛双语网站交互初稿，可离线审核与编辑。">
+<title>STM 网站交互初稿 v1 · 中英文</title>
+<link rel="stylesheet" href="styles.css">
+<script src="prototype.js" defer></script>
+</head>
+<body>
+<header class="review-header"><h1>STM 网站 · 交互审核初稿 v1</h1><p>2026-11-09 · 可切换页面、中文 / EN、桌面 / 手机与交互关系图。赛事内容与外部入口仍为占位。</p></header>
+<noscript>请启用 JavaScript 以切换页面和语言。当前只显示中文主页。</noscript>
+<div id="stm-wireframes" aria-label="STM 编程大赛网页线框草图">
+  <div class="studio-toolbar">
+    <div class="studio-tabs" aria-label="草图视图">
+      <button type="button" class="studio-tab cursor-interaction" data-view="pages" aria-pressed="true">页面草图</button>
+      <button type="button" class="studio-tab cursor-interaction" data-view="flow" aria-pressed="false">交互关系</button>
+    </div>
+    <div class="device-controls" aria-label="预览尺寸">
+      <button type="button" class="device cursor-interaction" data-device="desktop" aria-pressed="true">桌面</button>
+      <button type="button" class="device cursor-interaction" data-device="mobile" aria-pressed="false">手机</button>
+    </div>
+  </div>
+
+  <div class="pages-view">
+    <div class="browser-shell">
+      <div class="browser-bar"><span class="route-label">STM /</span><span class="wireframe-label">线框示意 · 非最终视觉</span></div>
+      <div class="site" aria-label="STM 网站原型">
+        <header class="site-header">
+          <a class="brand cursor-interaction" href="#home" data-route="home" aria-label="STM，返回主页"><span class="logo-slot">STM</span><span class="brand-caption">编程大赛</span></a>
+          <button class="menu-toggle cursor-interaction" type="button" aria-expanded="false" aria-controls="stm-site-nav">菜单</button>
+          <nav id="stm-site-nav" class="site-nav" aria-label="网站主导航">
+            <a class="cursor-interaction" href="#home" data-route="home" aria-current="page">主页</a>
+            <a class="cursor-interaction" href="#rules" data-route="rules">赛制详情</a>
+            <a class="cursor-interaction" href="#about" data-route="about">介绍</a>
+          </nav>
+          <div class="language-switch" role="group" aria-label="选择语言"><button type="button" class="language-option cursor-interaction" data-lang="zh" lang="zh-CN" aria-label="切换至中文" aria-pressed="true">中文</button><button type="button" class="language-option cursor-interaction" data-lang="en" lang="en" aria-label="Switch to English" aria-pressed="false">EN</button></div>
+          <button class="action primary header-register cursor-interaction" type="button" data-register>立即报名 ↗</button>
+        </header>
+        <div class="sponsor-strip"><span>支持单位</span><div class="sponsor-placeholder">赞助商 LOGO</div><div class="sponsor-placeholder">赞助商 LOGO</div></div>
+
+        <main>
+          <article data-page="home" aria-label="主页草图">
+            <section class="hero section-pad">
+              <div class="hero-copy">
+                <span class="small-label">STM PROGRAMMING COMPETITION</span>
+                <h1>STM<br>编程大赛</h1>
+                <p class="placeholder-copy">活动简介：面向哪些学生、挑战什么问题，以及参赛可以获得什么。</p>
+                <div class="actions"><button class="action primary cursor-interaction" type="button" data-register>立即报名 ↗</button><a class="text-link cursor-interaction" href="#rules" data-route="rules">了解赛制 →</a></div>
+              </div>
+              <div class="media-slot" role="img" aria-label="赛事主视觉或海报占位"><span>赛事主视觉 / 海报</span><span class="small-label">图片占位</span></div>
+            </section>
+            <dl class="event-facts section-pad"><div><dt>比赛时间</dt><dd>日期与时段待定</dd></div><div><dt>比赛地点</dt><dd>校区 / 场地待定</dd></div><div><dt>报名截止</dt><dd>截止时间待定</dd></div></dl>
+            <section class="section-pad spaced-section">
+              <h2>选择你的赛道</h2><p class="section-sub">赛道名称及数量示意，按实际配置调整。</p>
+              <div class="track-grid">
+                <div class="track-block"><span class="track-index">A</span><h3>赛道 A · 名称待定</h3><p>一句话说明适合对象与挑战方向。</p><a class="text-link cursor-interaction" href="#rules-track-a" data-route="rules" data-section="competition" data-track="a">查看本赛道规则 →</a></div>
+                <div class="track-block"><span class="track-index">B</span><h3>赛道 B · 名称待定</h3><p>一句话说明与另一赛道的区别。</p><a class="text-link cursor-interaction" href="#rules-track-b" data-route="rules" data-section="competition" data-track="b">查看本赛道规则 →</a></div>
+              </div>
+            </section>
+            <section class="section-pad spaced-section">
+              <h2>奖项与奖品</h2>
+              <div class="award-row"><span>奖项名称<br><b>待公布</b></span><span>获奖名额<br><b>待公布</b></span><span>奖金 / 奖品 / 证书<br><b>待公布</b></span></div>
+            </section>
+            <section class="section-pad quick-links"><h2>参赛前，了解更多</h2><div class="link-list"><a class="cursor-interaction" href="#rules-faq" data-route="rules" data-section="faq">常见问题 <span>→</span></a><a class="cursor-interaction" href="#rules-past" data-route="rules" data-section="past">去年赛题参考 <span>→</span></a><a class="cursor-interaction" href="#about" data-route="about">认识策划团队 <span>→</span></a></div></section>
+          </article>
+
+          <article data-page="rules" aria-label="赛制详情草图" hidden>
+            <div class="page-heading section-pad"><span class="small-label">比赛信息</span><h1>赛制详情</h1><p>本期规则、常见问题与往届参考资料。</p></div>
+            <nav class="section-nav section-pad" aria-label="赛制页内导航"><a class="cursor-interaction" href="#competition" data-jump="competition">本期赛制</a><a class="cursor-interaction" href="#faq" data-jump="faq">FAQ</a><a class="cursor-interaction" href="#past" data-jump="past">去年赛题参考</a></nav>
+            <section class="section-pad spaced-section" id="stm-competition">
+              <h2>本期赛制</h2>
+              <div class="track-tabs" role="tablist" aria-label="赛道规则"><button type="button" id="stm-track-a" class="track-tab cursor-interaction" data-track-tab="a" role="tab" aria-selected="true" aria-controls="stm-track-panel">赛道 A</button><button type="button" id="stm-track-b" class="track-tab cursor-interaction" data-track-tab="b" role="tab" aria-selected="false" aria-controls="stm-track-panel">赛道 B</button></div>
+              <div id="stm-track-panel" role="tabpanel" aria-labelledby="stm-track-a">
+                <h3 class="selected-track-title">赛道 A · 规则说明</h3>
+                <dl class="rule-list"><div><dt>参赛资格</dt><dd>面向对象、年级及基础要求待确认。</dd></div><div><dt>组队方式</dt><dd>个人 / 团队、人数限制待确认。</dd></div><div><dt>比赛形式</dt><dd>时长、语言、设备与允许使用的资料待确认。</dd></div><div><dt>评分与提交</dt><dd>评审标准、提交内容与截止时间待确认。</dd></div></dl>
+              </div>
+              <div class="schedule"><h3>参赛流程</h3><ol><li><b>报名</b><span>日期待定</span></li><li><b>参赛</b><span>日期待定</span></li><li><b>评审 / 颁奖</b><span>日期待定</span></li></ol></div>
+            </section>
+            <section class="section-pad spaced-section" id="stm-faq"><h2>FAQ</h2><p class="section-sub">问题为排版示意，答案以最终规则为准。</p>
+              <details><summary>没有编程基础可以参加吗？</summary><p>此处说明适合的赛道、最低基础要求与准备建议。具体内容待确认。</p></details>
+              <details><summary>可以跨专业或跨年级组队吗？</summary><p>此处说明组队人数、跨专业及跨年级限制。具体内容待确认。</p></details>
+              <details><summary>比赛需要自带电脑吗？</summary><p>此处列出设备、开发环境与现场网络要求。具体内容待确认。</p></details>
+              <details><summary>如何报名，报名后如何接收通知？</summary><p>此处说明报名表入口、报名确认方式和后续通知渠道。具体内容待确认。</p></details>
+            </section>
+            <section class="section-pad spaced-section" id="stm-past"><h2>去年赛题参考</h2><p class="section-sub">仅供了解题目形式与难度，本期规则以本页为准。</p><div class="resource-row"><div><h3>去年赛题资料</h3><span class="small-label">题目说明 / 样例 / 附件</span></div><button class="action cursor-interaction" type="button" data-resource>查看资料 ↗</button></div></section>
+            <div class="section-pad closing-cta"><p>准备好参加了吗？</p><button class="action primary cursor-interaction" type="button" data-register>立即报名 ↗</button></div>
+          </article>
+
+          <article data-page="about" aria-label="介绍页草图" hidden>
+            <div class="page-heading section-pad"><span class="small-label">关于 STM</span><h1>从比赛，<br>到共同成长。</h1><p>活动定位与初衷：为什么发起 STM 编程大赛。</p></div>
+            <section class="section-pad spaced-section"><h2>活动发展历程</h2><ol class="history"><li><span class="year">创办年份</span><div><h3>第一届活动</h3><p>创办背景与最初目标，内容待补充。</p></div></li><li><span class="year">往届年份</span><div><h3>成长与变化</h3><p>重要赛制变化、活动成果或关键事件，内容待补充。</p></div></li><li><span class="year">本届</span><div><h3>本期 STM 编程大赛</h3><p>本届亮点与延续的活动理念，内容待补充。</p></div></li></ol></section>
+            <section class="section-pad spaced-section"><h2>策划团队</h2><p class="section-sub">按职责分组，成员数量与名单待确认。</p><div class="team-grid"><div><h3>统筹策划</h3><p>成员姓名 · 职责</p></div><div><h3>赛题与评审</h3><p>成员姓名 · 职责</p></div><div><h3>宣传与设计</h3><p>成员姓名 · 职责</p></div><div><h3>现场与技术支持</h3><p>成员姓名 · 职责</p></div></div></section>
+            <div class="section-pad closing-cta"><a class="text-link cursor-interaction" href="#rules" data-route="rules">查看本期赛制 →</a><button class="action primary cursor-interaction" type="button" data-register>立即报名 ↗</button></div>
+          </article>
+        </main>
+
+        <footer class="site-footer section-pad"><div class="footer-top"><a href="#home" data-route="home" class="brand cursor-interaction"><span class="logo-slot">STM</span><span class="brand-caption">编程大赛</span></a><div class="footer-nav"><a class="cursor-interaction" href="#home" data-route="home">主页</a><a class="cursor-interaction" href="#rules" data-route="rules">赛制详情</a><a class="cursor-interaction" href="#about" data-route="about">About</a></div></div><div class="footer-sponsors"><span>赞助与支持</span><div class="sponsor-placeholder">赞助商 LOGO</div><div class="sponsor-placeholder">赞助商 LOGO</div></div><div class="footer-bottom"><span>活动联系渠道 · 待补充</span><button type="button" class="plain-button cursor-interaction" data-top>返回顶部 ↑</button></div></footer>
+
+        <div class="preview-overlay" hidden>
+          <section class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="stm-dialog-title"><div class="dialog-heading"><h2 id="stm-dialog-title">报名入口预览</h2><button type="button" class="plain-button cursor-interaction" data-close aria-label="关闭预览">关闭 ×</button></div><p class="dialog-copy"></p><div class="destination-slot"></div><button class="action" type="button" disabled data-destination>链接待提供</button></section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-view" hidden>
+    <div class="flow-global"><span>全站共用</span><b>活动 Logo + 主导航 + 中文 / EN + 报名入口</b><span>三个页面均有中、英文独立版本，单页只呈现当前语言。</span></div>
+    <div class="locale-flow"><div><b>中文版 /zh/</b><span>主页 · 赛制详情 · 介绍</span></div><div class="locale-arrow">⇄ 语言切换 ⇄</div><div><b>English /en/</b><span>Home · Rules · About</span></div></div>
+    <div class="flow-pages">
+      <section class="flow-page"><div class="mini-browser"><div class="mini-nav"></div><div class="mini-home"><div><b>STM 编程大赛</b><span class="mini-line"></span><span class="mini-cta">报名 ↗</span></div><div class="mini-image"></div></div><div class="mini-facts"><span></span><span></span><span></span></div><div class="mini-columns"><span>赛道</span><span>奖项</span></div></div><button class="flow-open cursor-interaction" type="button" data-open-page="home">主页 / →</button><p>活动概览 · 时间地点 · 赛道奖品</p></section>
+      <section class="flow-page"><div class="mini-browser"><div class="mini-nav"></div><b>赛制详情</b><div class="mini-columns"><span>赛道 A</span><span>赛道 B</span></div><span class="mini-line"></span><div class="mini-faq">FAQ ＋</div><div class="mini-faq">去年赛题 ↗</div></div><button class="flow-open cursor-interaction" type="button" data-open-page="rules">赛制详情 /rules →</button><p>本期规则 · FAQ · 去年赛题</p></section>
+      <section class="flow-page"><div class="mini-browser"><div class="mini-nav"></div><b>About STM</b><div class="mini-history"><span>创办</span><span>发展</span><span>本届</span></div><div class="mini-columns"><span>团队</span><span>成员</span></div></div><button class="flow-open cursor-interaction" type="button" data-open-page="about">介绍 /about →</button><p>活动历程 · 策划团队</p></section>
+    </div>
+    <div class="route-bridge"><span>主页</span><span>⇄ 全站导航 ⇄</span><span>赛制详情</span><span>⇄ 全站导航 ⇄</span><span>About</span></div>
+    <div class="flow-details"><h3>从信息到行动</h3><div class="flow-row"><b>任一页面</b><span>点击「立即报名」</span><strong>→ 外部报名表 ↗</strong></div><div class="flow-row"><b>主页 · 赛道 A / B</b><span>点击「查看规则」</span><strong>→ 赛制页 · 对应赛道</strong></div><div class="flow-row"><b>主页 · 常见问题</b><span>点击入口</span><strong>→ 赛制页 #faq</strong></div><div class="flow-row"><b>主页 · 去年赛题</b><span>点击入口</span><strong>→ 赛制页 #past</strong></div><div class="flow-row"><b>赛制页 · FAQ</b><span>点击问题</span><strong>→ 原位展开 / 收起</strong></div><div class="flow-row"><b>赛制页 · 去年赛题</b><span>点击「查看资料」</span><strong>→ 资料页 / PDF / 附件 ↗</strong></div></div>
+    <div class="flow-note"><span>语言切换保持当前页面、赛道选择和 FAQ 展开状态；例如 /zh/rules ⇄ /en/rules。</span><span>站内导航沿用当前语言，并记住本次语言选择。</span><span>↗ 外部链接：新标签页打开，报名表与赛题资料的语言以对应资源为准。</span><span>报名状态：未开放 → 报名中 → 已截止；随活动阶段更新文案与入口。</span><span>手机：语言按钮常驻顶部，导航折叠为菜单，内容改为单列。</span></div>
+  </div>
+  <div class="sr-status" role="status" aria-live="polite"></div>
+</div>
+</body>
+</html>
