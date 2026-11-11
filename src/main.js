@@ -83,6 +83,7 @@ function render() {
   $('.selected-track-description').textContent = rememberedTrack === 'b' ? text.trackBDescription : text.trackADescription;
   $('.primary-nav').setAttribute('aria-label', text.mainNav);
   $('.language').setAttribute('aria-label', text.languageLabel);
+  $('.language').dataset.locale = route.language;
   $('.event-brand').setAttribute('aria-label', text.homeLabel);
   $('.top-partners').setAttribute('aria-label', text.partnersLabel);
   $('.track-picker').setAttribute('aria-label', text.trackPickerLabel);
@@ -191,3 +192,12 @@ document.querySelector('.skip-link').addEventListener('click', (event) => {
 window.addEventListener('hashchange', () => syncRoute());
 if (!window.location.hash.startsWith('#/')) history.replaceState(null, '', formatRoute(route));
 syncRoute({ initial: true });
+
+// Language is a two-option selection, not an on/off switch.
+$('.language').addEventListener('keydown', (event) => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  const language = ['ArrowLeft', 'Home'].includes(event.key) ? 'zh' : 'en';
+  navigate({ ...route, language, track: rememberedTrack });
+  $(`[data-language="${language}"]`).focus();
+});

@@ -87,9 +87,13 @@ button,a { touch-action:manipulation; }
 #app .primary-nav a { color:var(--subtle); padding:5px 0; white-space:nowrap; position:relative; }
 #app .primary-nav a[aria-current=page] { color:var(--ink); }
 #app .primary-nav a[aria-current=page]::after { content:""; position:absolute; height:2px; width:100%; bottom:0; left:0; background:var(--accent); }
-#app .language { display:flex; gap:8px; align-items:center; flex-shrink:0; }
-#app .language button { padding:5px 0; font-size:14px; color:var(--subtle); }
-#app .language button[aria-pressed=true] { color:var(--ink); text-decoration:underline; text-underline-offset:5px; }
+/* Persistent brand wording: header/footer stay in English in both locales. */
+#app .language { position:relative; isolation:isolate; display:grid; grid-template-columns:1fr 1fr; flex-shrink:0; width:116px; height:44px; padding:4px; gap:0; border-radius:10px; background:#e5ecf6; }
+#app .language-thumb { position:absolute; z-index:-1; top:4px; bottom:4px; left:4px; width:calc((100% - 8px)/2); border-radius:7px; background:#164ab4; box-shadow:0 2px 5px #12367524; transform:translateX(0); transition:transform 280ms cubic-bezier(.22,1,.36,1); pointer-events:none; }
+#app .language[data-locale=en] .language-thumb { transform:translateX(100%); }
+#app .language button { position:relative; z-index:1; min-width:0; padding:0; border-radius:7px; font-size:14px; font-weight:500; color:#52647b; transition:color 160ms ease; }
+#app .language button[aria-pressed=true] { color:#fff; text-decoration:none; }
+#app .website .language button:focus-visible { outline:2px solid #8ab5ff; outline-offset:-2px; }
 #app .website .register-button { border:1px solid var(--line); padding:8px 13px; font-size:15px; white-space:nowrap; }
 #app .menu-button { display:none; }
 #app .top-partners { display:flex; justify-content:flex-end; align-items:center; gap:25px; margin:0 var(--pad); padding:12px 0; border-top:1px solid var(--line); }
@@ -260,3 +264,10 @@ button,a { touch-action:manipulation; }
   #app .footer-heading { flex-wrap:wrap; gap:12px; }
   #app .footer-event>span { font-size:14px; }
 }
+
+@media(max-width:680px) {
+  #app .site-header { column-gap:10px; }
+  #app .language { width:104px; }
+}
+@media(pointer:coarse) { #app .language { height:52px; } }
+@media(prefers-reduced-motion:reduce) { #app .language-thumb,#app .language button { transition:none; } }
