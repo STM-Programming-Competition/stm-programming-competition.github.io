@@ -1,7 +1,7 @@
 import { access, readFile, readdir } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { translations } from '../src/content/locales.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -24,6 +24,12 @@ export async function checkProject() {
   }
   for (const match of html.matchAll(/(?:src|href)="(\.\/[^"#?]+)"/g)) await access(join(root, match[1]));
   for (const file of await filesIn(join(root, 'src'))) {
+    if (file.endsWith('.css')) {
+      const css = await readFile(file, 'utf8');
+      for (const match of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
+        if (!/^(data:|https?:|#)/.test(match[1])) await access(resolve(dirname(file), match[1]));
+      }
+    }
     if (!file.endsWith('.js')) continue;
     const result = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
     if (result.status !== 0) throw new Error(result.stderr);

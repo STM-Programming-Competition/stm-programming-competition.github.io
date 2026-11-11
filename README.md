@@ -47,6 +47,7 @@ npm run dev -- --port 5174
 │   ├── styles/main.css        # 视觉规则和响应式样式
 │   └── assets/
 │       ├── preview-dark.svg   # 浏览器标签图标
+│       ├── fonts/Ubuntu/      # 自托管英文字体与 UFL.txt 授权
 │       ├── images/            # 原始赛事主视觉
 │       └── logos/             # 活动、ST、UESTC、Glasgow 标识
 ├── scripts/
@@ -140,3 +141,7 @@ npm run preview
 - [素材清单与替换方式](docs/ASSETS.md)
 
 代码许可证沿用 [LICENSE](LICENSE)。提供的大学和 ST Logo 及相关商标权归各自权利人，不因代码许可证而改变。
+
+## 字体
+
+主要英文字体为本地 Ubuntu，文件及授权位于 `src/assets/fonts/Ubuntu/`，随构建复制进 `dist/`。中文采用系统中文字体回退；不使用 Google Fonts 或其他字体 CDN。Ubuntu 字体受该目录的 `UFL.txt` 约束，不受代码 MIT 许可证替代。

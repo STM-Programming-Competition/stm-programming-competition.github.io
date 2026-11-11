@@ -1,5 +1,63 @@
+/* Self-hosted original Ubuntu fonts; licence: ../assets/fonts/Ubuntu/UFL.txt. */
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* Open Prospectus: native CSS, preserved from the selected visual direction. */
-:root { color-scheme:light; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:#f7f9fc; color:#122d53; }
+:root { color-scheme:light; font-family:"Ubuntu",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:#f7f9fc; color:#122d53; }
 * { box-sizing:border-box; }
 body { margin:0; }
 button,a,summary { -webkit-tap-highlight-color:transparent; }

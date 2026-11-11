@@ -8,7 +8,7 @@ const option = (name, fallback) => args.includes(name) ? args[args.indexOf(name)
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const root = resolve(projectRoot, option('--dir', '.'));
 const port = Number(option('--port', '5173'));
-const mime = { '.html':'text/html; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.css':'text/css; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpeg':'image/jpeg', '.jpg':'image/jpeg', '.json':'application/json; charset=utf-8' };
+const mime = { '.ttf':'font/ttf', '.html':'text/html; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.css':'text/css; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpeg':'image/jpeg', '.jpg':'image/jpeg', '.json':'application/json; charset=utf-8' };
 
 const server = createServer(async (request, response) => {
   if (!['GET', 'HEAD'].includes(request.method)) { response.writeHead(405).end(); return; }

@@ -25,3 +25,7 @@
 Glasgow 文件的有效标识约位于画布 `(166,164)-(818,367)`，当前 `.glasgow-mark img` 设置针对该画布边距。换用其他边距的素材时，应同步调整样式偏移。
 
 原 Logo 内自带的中英文文字不随网页语言切换而重绘或翻译。策划方与赞助方的最终角色排序待活动方确认，当前使用统一的「策划与支持」标签。
+
+## Ubuntu 字体素材
+
+从提供的 `ip-lab-manual-2026/assets/fonts/Ubuntu/` 目录原样复制八个 TTF 字体文件及 `UFL.txt` 至 `src/assets/fonts/Ubuntu/`。文件包含 Light、Regular、Medium、Bold 以及对应斜体，未转换、子集化或修改。字体使用原 Ubuntu Font Licence，随源码和构建产物一同保留。
