@@ -46,9 +46,9 @@ npm run dev -- --port 5174
 │   ├── lib/router.js          # Hash 路由与外部 URL 校验
 │   ├── styles/main.css        # 视觉规则和响应式样式
 │   └── assets/
-│       ├── favicon.svg
+│       ├── preview-dark.svg   # 浏览器标签图标
 │       ├── images/            # 原始赛事主视觉
-│       └── logos/             # ST、UESTC、Glasgow 原文件
+│       └── logos/             # 活动、ST、UESTC、Glasgow 标识
 ├── scripts/
 │   ├── serve.mjs              # 开发及产物预览服务器
 │   ├── check.mjs              # 源码、文案及素材检查
@@ -132,7 +132,7 @@ npm run preview
 
 根目录也可作为 GitHub Pages 的站点根目录：路径采用相对引用，页面使用 Hash 路由。若未来采用 GitHub Actions 部署，可上传构建后的 `dist/`。本仓库未添加自动部署流程。
 
-**本次仅更新本地工作区，不包含 Git 提交、推送、Pages 设置修改或线上发布。** 原 `.git`、远程地址、历史、`.nojekyll` 与许可证保留；旧版源码可从既有 Git 历史查看。
+本次更新会直接发布到现有 GitHub Pages 仓库。原 `.git`、远程地址、历史、`.nojekyll` 与许可证保留；旧版源码可从既有 Git 历史查看。
 
 ## 进一步维护
 

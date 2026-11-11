@@ -19,7 +19,7 @@ button,a { touch-action:manipulation; }
 #app .website button { border:0; background:transparent; }
 #app .site-header { display:flex; align-items:center; gap:22px; padding:20px var(--pad); }
 #app .event-brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
-#app .st-mark { width:42px; height:28px; }
+#app .activity-mark { width:47px; height:40px; flex-shrink:0; }
 #app .event-brand>span { font-size:18px; font-weight:650; line-height:1.2; }
 #app .brand-sub { display:block; font-size:10px; font-weight:400; margin-top:4px; }
 #app .primary-nav { display:flex; gap:22px; align-items:center; justify-content:flex-end; margin-left:auto; font-size:12px; }
@@ -74,7 +74,7 @@ button,a { touch-action:manipulation; }
 #app .footer-bottom { margin-top:22px; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:10px; color:var(--subtle); }
 #app .footer-path { font-family:ui-monospace,monospace; }
 #app .prospectus { --surface:#f7f9fc; --ink:#122d53; --subtle:#52647b; --line:#d1dbe7; --accent:#164ab4; --accent-ink:#fff; --headline:64px; --radius:4px; color-scheme:light; }
-#app .prospectus .st-mark { padding:5px; width:44px; height:34px; background:#112b51; border-radius:2px; }
+#app .prospectus .activity-mark { border-radius:2px; }
 #app .prospectus .top-partners { background:#112b51; border-top:0; padding:12px 20px; border-radius:3px; }
 #app .prospectus .hero { padding:40px var(--pad) 0; }
 #app .prospectus .hero-copy { display:grid; grid-template-columns:1.3fr 1fr; gap:16px 30px; align-items:start; }

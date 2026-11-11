@@ -1,17 +1,19 @@
 # 素材清单
 
-六个用户提供的原文件均完整复制进仓库，文件内容保持不变。运行网站无需读取仓库之外的 `Posters/`。
+用户提供的素材原文件均完整复制进仓库，文件内容保持不变。运行网站无需读取仓库之外的素材目录。
 
 | 原文件 | 仓库路径 | 用途 |
 | --- | --- | --- |
 | `Poster A initial.jpeg` | `src/assets/images/competition-poster.jpeg` | 主页横幅及手机主视觉 |
-| `STM.logo white.png` | `src/assets/logos/st-white.png` | 顶部品牌及上下支持区 |
+| `STM.logo white.png` | `src/assets/logos/st-white.png` | 上下支持区的 ST 标识 |
 | `uestc logo white text.png` | `src/assets/logos/uestc-white.png` | 上下支持区 |
 | `Unboxed colour logo white text.png` | `src/assets/logos/glasgow-white.png` | 深蓝底板上的标识 |
 | `Unboxed colour logo blue text.png` | `src/assets/logos/glasgow-blue.png` | 存档供浅色背景备用 |
 | `st logos scheme.jpeg` | `docs/brand/st-logo-variants.jpeg` | 版本配色参考，不直接作为网页 Logo 拼图 |
+| `preview-dark.svg` | `src/assets/preview-dark.svg` | 浏览器标签图标，保留方形画布 |
+| `logo.svg` | `src/assets/logos/logo.svg` | 网页左上角活动 Logo，保持原始 320:272 比例 |
 
-`src/assets/favicon.svg` 是新增的 STM 文字小图标，不替代提供的品牌 Logo。
+活动标识 SVG 来自 `logo-svg/Logo_02_Final_2026-11-11/`，原文件内容不变。`logo.svg` 用于页眉；`preview-dark.svg` 用于浏览器标签。
 
 ## 替换方式
 

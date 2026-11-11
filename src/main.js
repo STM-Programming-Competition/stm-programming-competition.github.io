@@ -86,6 +86,7 @@ function render() {
   $('.track-picker').setAttribute('aria-label', text.trackPickerLabel);
   $('.rules-navigation').setAttribute('aria-label', route.language === 'en' ? 'On this page' : '本页目录');
   $('.hero-art img').alt = text.posterAlt;
+  $('.activity-mark').alt = route.language === 'en' ? 'STM competition logo' : 'STM 活动标识';
   $$('.uestc-mark').forEach((image) => { image.alt = route.language === 'en' ? 'University of Electronic Science and Technology of China' : '电子科技大学'; });
   $('.footer-path').textContent = formatRoute(route).slice(1);
   const pageTitle = text[`pageTitle${route.page[0].toUpperCase()}${route.page.slice(1)}`];
