@@ -1,0 +1,44 @@
+/* Core Reactor: decorative SVGs; the complete card remains a normal rules link. */
+#app .prospectus .reactor-card {
+  --card-base:#0b1d34; --card-edge:#24405b; --card-highlight:#65b6fa; --card-glow:#3186d04a;
+  display:block; position:relative; isolation:isolate; height:330px; padding:0;
+  overflow:hidden; border:1px solid var(--card-edge); border-radius:5px;
+  background:var(--card-base); color:#f4f8ff;
+}
+#app .prospectus .vip-card { --card-base:#2b151b; --card-edge:#5e303a; --card-highlight:#ff7a63; --card-glow:#f3443745; }
+#app .reactor-card::before { content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(ellipse at 50% 35%,var(--card-glow),transparent 70%); opacity:.25; }
+#app .reactor-card::after { content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--card-highlight); opacity:0; }
+#app .reactor-card .reactor-art { display:block; width:100%; height:245px; object-fit:contain; opacity:.4; pointer-events:none; }
+#app .reactor-card .track-caption { position:absolute; inset:auto 0 0; padding:30px 22px 20px; background:linear-gradient(transparent,var(--card-base) 37%); }
+#app .reactor-card .track-title { display:flex; gap:12px; align-items:center; justify-content:space-between; }
+#app .reactor-card h3 { font-size:28px; line-height:1.2; color:#f4f8ff; }
+#app .reactor-card .track-arrow { margin:0; color:var(--card-highlight); font-size:25px; opacity:.65; }
+#app .reactor-card .track-role { color:#dce6f0; font-size:16px; margin-top:7px; }
+#app .reactor-card .track-description { color:#acbdd0; font-size:16px; line-height:1.5; margin-top:4px; }
+#app .vip-card .track-description { color:#d1b1b5; }
+#app .prospectus .reactor-card:is(:hover,:focus-visible) { border-color:var(--card-highlight); }
+#app .reactor-card:is(:hover,:focus-visible) .reactor-art { opacity:1; }
+#app .reactor-card:is(:hover,:focus-visible)::before,
+#app .reactor-card:is(:hover,:focus-visible)::after,
+#app .reactor-card:is(:hover,:focus-visible) .track-arrow { opacity:1; }
+#app .website .reactor-card:focus-visible { outline:2px solid var(--card-highlight); outline-offset:4px; }
+#app .selected-track-role { margin-top:8px; font-weight:500; }
+#app .selected-track-description { margin-top:4px; color:var(--subtle); }
+@media(prefers-reduced-motion:no-preference) {
+  #app .prospectus .reactor-card { transition:transform .2s ease,border-color .2s ease; }
+  #app .prospectus .reactor-card:hover,#app .prospectus .reactor-card:focus-visible { transform:translateY(-3px); }
+  #app .reactor-card .reactor-art,#app .reactor-card::before,#app .reactor-card::after,#app .reactor-card .track-arrow { transition:opacity .24s ease,transform .24s ease; }
+  #app .reactor-card:is(:hover,:focus-visible) .reactor-art { transform:translateY(-3px); }
+}
+@media(prefers-reduced-motion:reduce) {
+  #app .prospectus .reactor-card:is(:hover,:focus-visible) { transform:none; }
+}
+@media(max-width:680px) {
+  #app .prospectus .reactor-card { height:310px; padding:0; }
+  #app .reactor-card .reactor-art { height:222px; }
+  #app .reactor-card h3 { font-size:26px; }
+  #app .reactor-card .track-caption { padding:25px 20px 18px; }
+  #app .track-picker button { flex:1; min-width:0; padding:10px 12px; }
+}
+/* Touch screens keep the illustration legible without relying on hover. */
+@media(hover:none) { #app .reactor-card .reactor-art { opacity:.65; } }

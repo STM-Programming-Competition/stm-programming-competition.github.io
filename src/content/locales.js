@@ -19,9 +19,8 @@ export const translations = {
     "deadlineValue": "截止时间待公布",
     "tracksTitle": "找到你的挑战。",
     "tracksDescription": "从兴趣出发，选择适合自己的赛道。",
-    "trackA": "赛道 A",
-    "trackPlaceholder": "赛道名称与参赛要求待公布",
-    "trackB": "赛道 B",
+    "trackA": "The IP Track",
+    "trackB": "The VIP Track",
     "awards": "为每一次突破喝彩。",
     "awardsDescription": "奖项设置、获奖名额与奖品即将公布。",
     "moreRules": "查看完整赛制 →",
@@ -82,7 +81,11 @@ export const translations = {
     "resourcesPending": "赛题文件或资料链接待提供。",
     "registrationNotOpen": "报名尚未开放",
     "registrationClosed": "报名已截止",
-    "openedPage": "当前页面："
+    "openedPage": "当前页面：",
+    "trackARole": "初级赛道",
+    "trackBRole": "挑战赛道",
+    "trackADescription": "为编程新手提供稳健的起点。",
+    "trackBDescription": "将核心推向极限。"
   },
   "en": {
     "brand": "Programming Competition",
@@ -103,9 +106,8 @@ export const translations = {
     "deadlineValue": "To be announced",
     "tracksTitle": "Find your challenge.",
     "tracksDescription": "Follow your curiosity. Choose your track.",
-    "trackA": "Track A",
-    "trackB": "Track B",
-    "trackPlaceholder": "Track details and requirements to be announced",
+    "trackA": "The IP Track",
+    "trackB": "The VIP Track",
     "awards": "Every breakthrough counts.",
     "awardsDescription": "Awards, prizes, and the number of winners will be announced soon.",
     "moreRules": "View all rules →",
@@ -166,6 +168,10 @@ export const translations = {
     "resourcesPending": "Past problem files or resource links have not been provided yet.",
     "registrationNotOpen": "Registration not open yet",
     "registrationClosed": "Registration closed",
-    "openedPage": "Current page: "
+    "openedPage": "Current page: ",
+    "trackARole": "Beginner Track",
+    "trackBRole": "Challenge Track",
+    "trackADescription": "A steady start for new programmers.",
+    "trackBDescription": "Push the core to the extreme."
   }
 };

@@ -49,3 +49,7 @@
 ## Ubuntu 字体
 
 字体放在 `src/assets/fonts/Ubuntu/`，通过 `@font-face` 注册 300 / 400 / 500 / 700 四种字重及对应斜体，保留原始 TTF 和 `UFL.txt`。正文、标题、导航、按钮的英文使用 Ubuntu；中文自动回退。赛道字母和页脚路径保留原有等宽字体。使用 `font-display: swap`，优先预加载常用的 Regular 和 Bold，其他字重按需加载。字体授权独立于代码 MIT 许可证。
+
+## 核心反应堆赛道卡片
+
+主页采用蓝色平稳核心的 The IP Track（Beginner Track）与红色高负荷能量阵的 The VIP Track（Challenge Track）。插画分别位于 `src/assets/images/ip-reactor.svg` 与 `vip-reactor.svg`，样式独立保存在 `src/styles/track-cards.css`。默认插图透明度 0.4，悬停及键盘聚焦时提亮至 1，配合边框高亮和 3px 上移；减少动态效果时保留高亮但移除位移。触屏默认亮度 0.65，点按直接进入对应赛道规则。文案由 `src/content/locales.js` 集中维护。

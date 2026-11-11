@@ -29,3 +29,10 @@ Glasgow 文件的有效标识约位于画布 `(166,164)-(818,367)`，当前 `.gl
 ## Ubuntu 字体素材
 
 从提供的 `ip-lab-manual-2026/assets/fonts/Ubuntu/` 目录原样复制八个 TTF 字体文件及 `UFL.txt` 至 `src/assets/fonts/Ubuntu/`。文件包含 Light、Regular、Medium、Bold 以及对应斜体，未转换、子集化或修改。字体使用原 Ubuntu Font Licence，随源码和构建产物一同保留。
+
+## 赛道插画
+
+- `src/assets/images/ip-reactor.svg`：核心反应堆方案的蓝色稳定芯片与冷却环。
+- `src/assets/images/vip-reactor.svg`：同一方案的红色高负荷芯片与能量阵。
+
+两份均为审核通过方案的本地 SVG，作为装饰性背景，不遮挡卡片文本；随构建产物一起复制。

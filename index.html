@@ -10,6 +10,7 @@
   <link rel="preload" href="./src/assets/fonts/Ubuntu/Ubuntu-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="./src/assets/fonts/Ubuntu/Ubuntu-Bold.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="./src/styles/main.css">
+  <link rel="stylesheet" href="./src/styles/track-cards.css">
   <script type="module" src="./src/main.js"></script>
 </head>
 <body>
@@ -32,13 +33,22 @@
           <div class="hero-index" aria-hidden="true">&lt;STM/&gt;</div>
         </section>
         <dl class="event-facts"><div><dt data-copy="dateLabel">比赛时间</dt><dd data-copy="dateValue">日期待公布</dd></div><div><dt data-copy="venueLabel">比赛地点</dt><dd data-copy="venueValue">场地待公布</dd></div><div><dt data-copy="deadlineLabel">报名截止</dt><dd data-copy="deadlineValue">截止时间待公布</dd></div></dl>
-        <section class="tracks-section"><div class="section-heading"><h2 data-copy="tracksTitle">找到你的挑战。</h2><p data-copy="tracksDescription">从兴趣出发，选择适合自己的赛道。</p></div><div class="tracks-layout"><a class="track-link cursor-interaction" href="#rules-a" data-page="rules" data-track="a"><span class="track-letter">A</span><div><h3 data-copy="trackA">赛道 A</h3><p data-copy="trackPlaceholder">赛道名称与参赛要求待公布</p></div><span class="track-arrow" aria-hidden="true">↗</span></a><a class="track-link cursor-interaction" href="#rules-b" data-page="rules" data-track="b"><span class="track-letter">B</span><div><h3 data-copy="trackB">赛道 B</h3><p data-copy="trackPlaceholder">赛道名称与参赛要求待公布</p></div><span class="track-arrow" aria-hidden="true">↗</span></a></div></section>
+        <section class="tracks-section"><div class="section-heading"><h2 data-copy="tracksTitle">找到你的挑战。</h2><p data-copy="tracksDescription">从兴趣出发，选择适合自己的赛道。</p></div><div class="tracks-layout">
+          <a class="track-link reactor-card ip-card cursor-interaction" href="#/zh/rules" data-page="rules" data-track="a">
+            <img class="reactor-art" src="./src/assets/images/ip-reactor.svg" width="480" height="290" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <div class="track-caption"><div class="track-title"><h3 data-copy="trackA">The IP Track</h3><span class="track-arrow" aria-hidden="true">↗</span></div><p class="track-role" data-copy="trackARole">初级赛道</p><p class="track-description" data-copy="trackADescription">为编程新手提供稳健的起点。</p></div>
+          </a>
+          <a class="track-link reactor-card vip-card cursor-interaction" href="#/zh/rules?track=b" data-page="rules" data-track="b">
+            <img class="reactor-art" src="./src/assets/images/vip-reactor.svg" width="480" height="290" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <div class="track-caption"><div class="track-title"><h3 data-copy="trackB">The VIP Track</h3><span class="track-arrow" aria-hidden="true">↗</span></div><p class="track-role" data-copy="trackBRole">挑战赛道</p><p class="track-description" data-copy="trackBDescription">将核心推向极限。</p></div>
+          </a>
+        </div></section>
         <section class="awards-section"><h2 data-copy="awards">为每一次突破喝彩。</h2><p data-copy="awardsDescription">奖项设置、获奖名额与奖品即将公布。</p><a class="inline-link cursor-interaction" href="#rules" data-page="rules" data-copy="moreRules">查看完整赛制 →</a></section>
       </article>
 
       <article data-screen="rules" hidden>
         <div class="subpage-title"><p class="event-name" data-copy="eventName">STM 编程大赛</p><h1 data-copy="rulesTitle">读懂规则，<br>开始挑战。</h1><p data-copy="rulesSubtitle">参赛前需要了解的事情，都在这里。</p></div>
-        <nav class="rules-navigation" aria-label="本页目录"><a href="#/zh/rules?section=competition" data-section="competition" data-copy="rules">赛制详情</a><a href="#/zh/rules?section=faq" data-section="faq">FAQ</a><a href="#/zh/rules?section=past" data-section="past" data-copy="pastTitle">去年赛题参考</a></nav><section id="competition" class="rules-section"><div class="track-picker" role="group" aria-label="赛道选择"><button type="button" data-select-track="a" aria-pressed="true" class="cursor-interaction" data-copy="trackA">赛道 A</button><button type="button" data-select-track="b" aria-pressed="false" class="cursor-interaction" data-copy="trackB">赛道 B</button></div><h2 class="selected-track">赛道 A</h2><dl class="rule-grid"><div><dt data-copy="eligibility">参赛资格</dt><dd data-copy="eligibilityValue">面向对象、年级与基础要求待确认。</dd></div><div><dt data-copy="team">组队方式</dt><dd data-copy="teamValue">个人或团队参赛、队伍人数待确认。</dd></div><div><dt data-copy="format">比赛形式</dt><dd data-copy="formatValue">时长、语言、设备与允许使用的资料待确认。</dd></div><div><dt data-copy="judging">评审与提交</dt><dd data-copy="judgingValue">评分标准、提交方式与截止时间待确认。</dd></div></dl></section>
+        <nav class="rules-navigation" aria-label="本页目录"><a href="#/zh/rules?section=competition" data-section="competition" data-copy="rules">赛制详情</a><a href="#/zh/rules?section=faq" data-section="faq">FAQ</a><a href="#/zh/rules?section=past" data-section="past" data-copy="pastTitle">去年赛题参考</a></nav><section id="competition" class="rules-section"><div class="track-picker" role="group" aria-label="赛道选择"><button type="button" data-select-track="a" aria-pressed="true" class="cursor-interaction" data-copy="trackA">The IP Track</button><button type="button" data-select-track="b" aria-pressed="false" class="cursor-interaction" data-copy="trackB">The VIP Track</button></div><h2 class="selected-track">The IP Track</h2><p class="selected-track-role">初级赛道</p><p class="selected-track-description">为编程新手提供稳健的起点。</p><dl class="rule-grid"><div><dt data-copy="eligibility">参赛资格</dt><dd data-copy="eligibilityValue">面向对象、年级与基础要求待确认。</dd></div><div><dt data-copy="team">组队方式</dt><dd data-copy="teamValue">个人或团队参赛、队伍人数待确认。</dd></div><div><dt data-copy="format">比赛形式</dt><dd data-copy="formatValue">时长、语言、设备与允许使用的资料待确认。</dd></div><div><dt data-copy="judging">评审与提交</dt><dd data-copy="judgingValue">评分标准、提交方式与截止时间待确认。</dd></div></dl></section>
         <section id="faq" class="faq-section"><h2>FAQ</h2><details><summary data-copy="faq1">没有编程基础可以参加吗？</summary><p data-copy="faq1Answer">适合的赛道与准备建议将随最终规则公布。</p></details><details><summary data-copy="faq2">比赛需要自带电脑吗？</summary><p data-copy="faq2Answer">设备与开发环境要求将在赛前公布。</p></details></section>
         <section id="past" class="past-section"><div><h2 data-copy="pastTitle">去年赛题参考</h2><p data-copy="pastSubtitle">了解题目形式与难度，为这次挑战做准备。</p></div><button class="cta cursor-interaction" type="button" data-resource data-copy="pastAction">查看资料 ↗</button></section>
       </article>

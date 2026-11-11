@@ -79,6 +79,8 @@ function render() {
   $$('[data-language]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.language === route.language)));
   $$('[data-select-track]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.selectTrack === rememberedTrack)));
   $('.selected-track').textContent = rememberedTrack === 'b' ? text.trackB : text.trackA;
+  $('.selected-track-role').textContent = rememberedTrack === 'b' ? text.trackBRole : text.trackARole;
+  $('.selected-track-description').textContent = rememberedTrack === 'b' ? text.trackBDescription : text.trackADescription;
   $('.primary-nav').setAttribute('aria-label', text.mainNav);
   $('.language').setAttribute('aria-label', text.languageLabel);
   $('.event-brand').setAttribute('aria-label', text.homeLabel);

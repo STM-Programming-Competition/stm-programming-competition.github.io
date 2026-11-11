@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 290" width="480" height="290">
+      <g fill="none" stroke="#3678b4" stroke-width="2"><ellipse cx="240" cy="145" rx="159" ry="83"/><ellipse cx="240" cy="145" rx="130" ry="64" stroke-dasharray="4 12"/><path d="M0 145H82M398 145H480M240 0V61M240 228V290"/></g>
+      <g fill="#17395c" stroke="#83bde9" stroke-width="2"><circle cx="81" cy="145" r="10"/><circle cx="399" cy="145" r="10"/><circle cx="240" cy="62" r="10"/><circle cx="240" cy="228" r="10"/></g>
+      <rect x="189" y="94" width="102" height="102" rx="14" fill="#17395c" stroke="#83bde9" stroke-width="2"/>
+      <g stroke="#83bde9" stroke-width="5"><path d="M202 94V79M221 94V79M240 94V79M259 94V79M278 94V79M202 196V211M221 196V211M240 196V211M259 196V211M278 196V211M189 107H174M189 126H174M189 145H174M189 164H174M189 183H174M291 107H306M291 126H306M291 145H306M291 164H306M291 183H306"/></g>
+      <rect x="207" y="112" width="66" height="66" rx="10" fill="#b1e1ff"/>
+      <circle cx="240" cy="145" r="20" fill="none" stroke="#0b1d34" stroke-width="2"/>
+      <circle cx="240" cy="145" r="7" fill="#0b1d34"/>
+    </svg>
