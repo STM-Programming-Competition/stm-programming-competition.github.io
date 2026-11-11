@@ -38,7 +38,7 @@ npm run dev -- --port 5174
 
 ```text
 .
-├── index.html                 # 网页入口，含中文初始页面
+├── index.html                 # 网页入口，含英文初始页面
 ├── src/
 │   ├── main.js                # 渲染、导航、语言、菜单、弹窗与动画
 │   ├── config.js              # 报名状态及外部链接
@@ -67,7 +67,7 @@ npm run dev -- --port 5174
 └── LICENSE
 ```
 
-采用 HTML、原生 CSS 和浏览器 ES modules；没有后端、数据库、远程字体或远程图片请求。保留源码、素材、内容、脚本和文档的常见分层，为三个展示页面保持简单的维护方式。
+采用 HTML、原生 CSS 和浏览器 ES modules；没有后端、数据库或远程图片请求；中文 MiSans 字体通过指定 CDN 加载。保留源码、素材、内容、脚本和文档的常见分层，为三个展示页面保持简单的维护方式。
 
 ## 页面与双语路由
 
@@ -82,6 +82,7 @@ npm run dev -- --port 5174
 Hash 路由可在 GitHub Pages 直接访问、刷新和前进/后退，不需要服务器重写。实际地址与草图中的 `/zh/rules` 示意形式不同。
 
 - 一次显示一种语言，语言选项保持 `中文 / EN`。
+- 首次访问默认英文；中文作为辅助语言，可手动切换。已有语言偏好或 URL 明确指定语言时，尊重相应选择。
 - 切换语言保留页面、赛道、FAQ 展开状态及页内目标。
 - 站内导航沿用当前语言；浏览器允许时会保存语言偏好。
 - URL 中明确指定的语言优先于已保存的偏好。
@@ -92,7 +93,7 @@ Hash 路由可在 GitHub Pages 直接访问、刷新和前进/后退，不需要
 
 编辑 `src/content/locales.js` 中同名的中文和英文文案，例如 `dateValue`、`venueValue`、`trackA` 和 `trackB`。两种语言的键需要保持一致。`rulesTitle` 和 `aboutTitle` 允许 `<br>` 指定标题换行，其他字段作为纯文本处理。
 
-`index.html` 包含不启用 JavaScript 时可阅读的中文首页；确认最终内容后，应同步其中的中文初始文字和描述。需要增减赛道、FAQ 或团队分组时，修改该文件的结构，并补齐双语键。
+`index.html` 包含不启用 JavaScript 时可阅读的英文首页；确认最终内容后，应同步其中的英文初始文字和描述。需要增减赛道、FAQ 或团队分组时，修改该文件的结构，并补齐双语键。
 
 ## 接入报名和往届资料
 
@@ -144,4 +145,4 @@ npm run preview
 
 ## 字体
 
-主要英文字体为本地 Ubuntu，文件及授权位于 `src/assets/fonts/Ubuntu/`，随构建复制进 `dist/`。中文采用系统中文字体回退；不使用 Google Fonts 或其他字体 CDN。Ubuntu 字体受该目录的 `UFL.txt` 约束，不受代码 MIT 许可证替代。
+主要英文字体为本地 Ubuntu，文件及授权位于 `src/assets/fonts/Ubuntu/`，随构建复制进 `dist/`。中文界面使用 MiSans 4.0.0（Normal / Demibold），通过提供的 jsDelivr 样式加载，失败时回退到系统中文字体。Ubuntu 字体受该目录的 `UFL.txt` 约束，不受代码 MIT 许可证替代。

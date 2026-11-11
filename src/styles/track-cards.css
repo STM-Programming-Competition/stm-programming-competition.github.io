@@ -22,7 +22,7 @@
 #app .reactor-card:is(:hover,:focus-visible)::after,
 #app .reactor-card:is(:hover,:focus-visible) .track-arrow { opacity:1; }
 #app .website .reactor-card:focus-visible { outline:2px solid var(--card-highlight); outline-offset:4px; }
-#app .selected-track-role { margin-top:8px; font-weight:500; }
+#app .selected-track-role { margin-top:8px; font-weight:var(--weight-medium); }
 #app .selected-track-description { margin-top:4px; color:var(--subtle); }
 @media(prefers-reduced-motion:no-preference) {
   #app .prospectus .reactor-card { transition:transform .2s ease,border-color .2s ease; }

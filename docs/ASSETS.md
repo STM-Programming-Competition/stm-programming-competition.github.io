@@ -36,3 +36,7 @@ Glasgow 文件的有效标识约位于画布 `(166,164)-(818,367)`，当前 `.gl
 - `src/assets/images/vip-reactor.svg`：同一方案的红色高负荷芯片与能量阵。
 
 两份均为审核通过方案的本地 SVG，作为装饰性背景，不遮挡卡片文本；随构建产物一起复制。
+
+## MiSans 中文字体
+
+中文界面通过 jsDelivr 引用 `misans@4.0.0/lib/Normal/MiSans-Normal.min.css` 和 `MiSans-Demibold.min.css`，未复制到本地。字体名称为 MiSans，样式中实际注册字重为 305 / 450。英文 Ubuntu 字体继续从仓库本地加载。

@@ -15,9 +15,9 @@ let previousRoute = null;
 
 function readLanguage() {
   try {
-    return localStorage.getItem(storageKey) === 'en' ? 'en' : 'zh';
+    return localStorage.getItem(storageKey) === 'zh' ? 'zh' : 'en';
   } catch {
-    return 'zh';
+    return 'en';
   }
 }
 

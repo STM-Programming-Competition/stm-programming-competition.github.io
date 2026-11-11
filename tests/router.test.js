@@ -2,6 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { parseRoute, formatRoute, externalUrl } from '../src/lib/router.js';
 
+test('first visits default to English while explicit Chinese routes and preferences remain valid', () => {
+  assert.equal(parseRoute('').language, 'en');
+  assert.equal(formatRoute({}), '#/en/');
+  assert.equal(parseRoute('#/zh/rules', 'en').language, 'zh');
+  assert.equal(parseRoute('', 'zh').language, 'zh');
+});
+
 test('shared rules URLs retain language, track, and target section after refresh', () => {
   const target = { language:'en', page:'rules', track:'b', section:'faq' };
   assert.deepEqual(parseRoute(formatRoute(target)), target);

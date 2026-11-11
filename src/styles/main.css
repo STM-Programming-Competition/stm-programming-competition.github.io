@@ -58,6 +58,9 @@
 
 /* Open Prospectus: native CSS, preserved from the selected visual direction. */
 :root { color-scheme:light; font-family:"Ubuntu",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:#f7f9fc; color:#122d53; }
+/* These match the actual weights declared by the pinned MiSans CDN stylesheets. */
+:root { --weight-regular:400; --weight-medium:500; --weight-semibold:600; --weight-bold:650; font-weight:var(--weight-regular); }
+:root:lang(zh) { --weight-regular:305; --weight-medium:450; --weight-semibold:450; --weight-bold:450; font-family:"MiSans","Ubuntu","PingFang SC","Microsoft YaHei",sans-serif; }
 * { box-sizing:border-box; }
 body { margin:0; }
 button,a,summary { -webkit-tap-highlight-color:transparent; }
@@ -78,8 +81,8 @@ button,a { touch-action:manipulation; }
 #app .site-header { display:flex; align-items:center; gap:18px; padding:14px var(--pad); }
 #app .event-brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
 #app .activity-mark { width:61px; height:52px; flex-shrink:0; }
-#app .event-brand>span { font-size:18px; font-weight:650; line-height:1.2; }
-#app .brand-sub { display:block; font-size:14px; font-weight:400; margin-top:4px; }
+#app .event-brand>span { font-size:18px; font-weight:var(--weight-bold); line-height:1.2; }
+#app .brand-sub { display:block; font-size:14px; font-weight:var(--weight-regular); margin-top:4px; }
 #app .primary-nav { display:flex; gap:22px; align-items:center; justify-content:flex-end; margin-left:auto; font-size:15px; }
 #app .primary-nav a { color:var(--subtle); padding:5px 0; white-space:nowrap; position:relative; }
 #app .primary-nav a[aria-current=page] { color:var(--ink); }
@@ -98,11 +101,11 @@ button,a { touch-action:manipulation; }
 #app .hero { position:relative; }
 #app .hero-copy { position:relative; z-index:1; }
 #app .event-name { font-size:15px; color:var(--subtle); }
-#app h1 { font-size:clamp(32px,6.5cqw,var(--headline)); font-weight:650; line-height:1.13; letter-spacing:-1.6px; }
+#app h1 { font-size:clamp(32px,6.5cqw,var(--headline)); font-weight:var(--weight-bold); line-height:1.13; letter-spacing:-1.6px; }
 #app .hero h1>span { display:block; }
 #app .hero-description { max-width:34em; color:var(--subtle); font-size:16px; }
 #app .hero-actions { display:flex; gap:22px; align-items:center; flex-wrap:wrap; }
-#app .website .cta { display:inline-flex; align-items:center; justify-content:center; padding:12px 23px; background:var(--accent); color:var(--accent-ink); font-size:14px; font-weight:600; white-space:nowrap; border-radius:var(--radius,2px); }
+#app .website .cta { display:inline-flex; align-items:center; justify-content:center; padding:12px 23px; background:var(--accent); color:var(--accent-ink); font-size:14px; font-weight:var(--weight-semibold); white-space:nowrap; border-radius:var(--radius,2px); }
 #app .secondary-action { font-size:15px; border-bottom:1px solid var(--line); padding:8px 0; }
 #app .hero-art img { width:100%; height:100%; object-fit:cover; }
 #app .art-caption { font-size:14px; color:var(--subtle); }
@@ -110,8 +113,8 @@ button,a { touch-action:manipulation; }
 #app .event-facts { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:16px 0; margin:0 var(--pad); }
 #app .event-facts dt { color:var(--subtle); font-size:14px; }
 #app .event-facts dd { font-size:14px; margin-top:7px; }
-#app h2 { font-size:26px; font-weight:600; line-height:1.35; letter-spacing:-.6px; }
-#app h3 { font-size:18px; font-weight:600; line-height:1.4; }
+#app h2 { font-size:26px; font-weight:var(--weight-semibold); line-height:1.35; letter-spacing:-.6px; }
+#app h3 { font-size:18px; font-weight:var(--weight-semibold); line-height:1.4; }
 #app .tracks-section { padding:24px var(--pad) 12px; }
 #app .section-heading p { color:var(--subtle); margin-top:8px; font-size:16px; }
 #app .tracks-layout { margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
@@ -124,8 +127,8 @@ button,a { touch-action:manipulation; }
 #app .inline-link { display:inline-block; border-bottom:1px solid var(--line); font-size:15px; margin-top:15px; padding-bottom:4px; }
 #app .site-footer { padding:20px var(--pad) 16px; border-top:1px solid var(--line); margin-top:auto; }
 #app .footer-heading { display:flex; align-items:center; justify-content:space-between; gap:18px; }
-#app .footer-event { font-size:25px; font-weight:650; display:flex; gap:12px; align-items:baseline; }
-#app .footer-event>span { font-size:14px; font-weight:400; }
+#app .footer-event { font-size:25px; font-weight:var(--weight-bold); display:flex; gap:12px; align-items:baseline; }
+#app .footer-event>span { font-size:14px; font-weight:var(--weight-regular); }
 #app .footer-links { display:flex; gap:20px; font-size:15px; }
 #app .partners-label { font-size:14px; color:var(--subtle); margin:12px 0 8px!important; }
 #app .footer-partners { display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
@@ -146,7 +149,7 @@ button,a { touch-action:manipulation; }
 #app .prospectus .event-facts { border-bottom:1px solid var(--line); }
 #app .prospectus .tracks-layout { gap:24px; }
 #app .prospectus .track-link { border-bottom:1px solid var(--line); padding:12px 0 16px; }
-#app .prospectus .track-letter { font-size:27px; font-weight:400; }
+#app .prospectus .track-letter { font-size:27px; font-weight:var(--weight-regular); }
 #app .prospectus .awards-section { padding-top:18px; padding-bottom:24px; }
 #app .prospectus .site-footer { background:#edf2f8; }
 #app .prospectus .footer-partners { display:inline-flex; background:#112b51; padding:13px 18px; border-radius:3px; }
@@ -158,7 +161,7 @@ button,a { touch-action:manipulation; }
 #app .track-picker button { padding:10px 24px; color:var(--subtle); }
 #app .track-picker button[aria-pressed=true] { background:var(--accent); color:var(--accent-ink); }
 #app .rule-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 28px; margin-top:16px!important; }
-#app .rule-grid dt { font-weight:500; }
+#app .rule-grid dt { font-weight:var(--weight-medium); }
 #app .rule-grid dd { color:var(--subtle); margin-top:5px; font-size:16px; }
 #app .faq-section details { border-bottom:1px solid var(--line); }
 #app .faq-section summary { padding:15px 0; }
@@ -237,7 +240,7 @@ button,a { touch-action:manipulation; }
 #app .hero-copy>*,#app .track-link>div { min-width:0; }
 #app .track-link { gap:16px; }
 #app .rule-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-#app .event-facts dd { font-size:16px; font-weight:500; }
+#app .event-facts dd { font-size:16px; font-weight:var(--weight-medium); }
 #app .footer-bottom { font-size:13px; }
 #app .brand-sub { font-size:12px; }
 #app .prospectus .hero-actions { align-self:start; }

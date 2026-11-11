@@ -3,8 +3,8 @@ export const pages = ['home', 'rules', 'about'];
 export const sections = ['competition', 'faq', 'past'];
 
 /** Hash routes work on GitHub Pages without a server-side rewrite or a 404 fallback. */
-export function parseRoute(hash, fallbackLanguage = 'zh') {
-  const fallback = languages.includes(fallbackLanguage) ? fallbackLanguage : 'zh';
+export function parseRoute(hash, fallbackLanguage = 'en') {
+  const fallback = languages.includes(fallbackLanguage) ? fallbackLanguage : 'en';
   const path = String(hash || '').replace(/^#/, '');
   const [pathname, query = ''] = path.split('?');
   const parts = pathname.split('/').filter(Boolean);
@@ -17,8 +17,8 @@ export function parseRoute(hash, fallbackLanguage = 'zh') {
   return { language, page, track, section };
 }
 
-export function formatRoute({ language = 'zh', page = 'home', track = 'a', section = '' }) {
-  const lang = languages.includes(language) ? language : 'zh';
+export function formatRoute({ language = 'en', page = 'home', track = 'a', section = '' }) {
+  const lang = languages.includes(language) ? language : 'en';
   const currentPage = pages.includes(page) ? page : 'home';
   const params = new URLSearchParams();
   if (currentPage === 'rules') {
