@@ -62,6 +62,8 @@
 :root { --weight-regular:400; --weight-medium:500; --weight-semibold:600; --weight-bold:650; font-weight:var(--weight-regular); }
 :root:lang(zh) { --weight-regular:305; --weight-medium:450; --weight-semibold:450; --weight-bold:450; font-family:"MiSans","Ubuntu","PingFang SC","Microsoft YaHei",sans-serif; }
 * { box-sizing:border-box; }
+/* Native section anchors (including problem-page contents) share smooth scrolling. */
+html { scroll-behavior:smooth; }
 body { margin:0; }
 button,a,summary { -webkit-tap-highlight-color:transparent; }
 button,summary { cursor:pointer; }

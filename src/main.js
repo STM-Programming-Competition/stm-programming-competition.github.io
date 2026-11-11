@@ -87,6 +87,7 @@ function render() {
   $('.event-brand').setAttribute('aria-label', text.homeLabel);
   $('.top-partners').setAttribute('aria-label', text.partnersLabel);
   $('.track-picker').setAttribute('aria-label', text.trackPickerLabel);
+  $('.track-picker').dataset.track = rememberedTrack;
   $('.rules-navigation').setAttribute('aria-label', route.language === 'en' ? 'On this page' : '本页目录');
   $('.hero-art img').alt = text.posterAlt;
   $('.activity-mark').alt = route.language === 'en' ? 'STM competition logo' : 'STM 活动标识';
@@ -113,7 +114,9 @@ function syncRoute({ initial = false } = {}) {
   const pageChanged = previousRoute && previousRoute.page !== route.page;
   const sectionChanged = route.section && (initial || previousRoute?.section !== route.section || pageChanged);
   if (sectionChanged) {
-    document.getElementById(route.section)?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    // Animate only in-page navigation. Fresh deep links and page changes position immediately.
+    const behavior = !initial && !pageChanged && !reducedMotion.matches ? 'smooth' : 'instant';
+    document.getElementById(route.section)?.scrollIntoView({ block: 'start', behavior });
   } else if (pageChanged) {
     window.scrollTo({ top: 0, behavior: 'instant' });
     $('#main-content').focus({ preventScroll: true });
@@ -126,7 +129,7 @@ function navigate(target) {
   const hash = formatRoute(target);
   if (window.location.hash === hash) {
     syncRoute();
-    if (target.section) document.getElementById(target.section)?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    if (target.section) document.getElementById(target.section)?.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
     else window.scrollTo({ top: 0, behavior: 'instant' });
   } else {
     window.location.hash = hash;
@@ -172,7 +175,7 @@ site.addEventListener('click', (event) => {
   const registration = event.target.closest('[data-register]');
   if (registration) { showEntry('registration', registration); return; }
   const resource = event.target.closest('[data-resource]');
-  if (resource) { showEntry('resources', resource); return; }
+  if (resource) { window.location.href = `./past-problems.html?lang=${route.language}&track=${rememberedTrack === 'b' ? 'vip' : 'ip'}`; return; }
   if (event.target.closest('[data-close]')) dialog.close();
 });
 
@@ -200,4 +203,13 @@ $('.language').addEventListener('keydown', (event) => {
   const language = ['ArrowLeft', 'Home'].includes(event.key) ? 'zh' : 'en';
   navigate({ ...route, language, track: rememberedTrack });
   $(`[data-language="${language}"]`).focus();
+});
+
+// Mirror the language selector's keyboard controls while retaining hash navigation.
+$('.track-picker').addEventListener('keydown', (event) => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  const track = ['ArrowLeft', 'Home'].includes(event.key) ? 'a' : 'b';
+  navigate({ ...route, track });
+  $(`[data-select-track="${track}"]`).focus();
 });

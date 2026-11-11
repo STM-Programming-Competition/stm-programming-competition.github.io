@@ -1,11 +1,13 @@
+/* Shared track identity: homepage cards and Rules selector use the same palette. */
+#app .website { --ip-base:#0b1d34; --ip-edge:#24405b; --ip-highlight:#65b6fa; --vip-base:#2b151b; --vip-edge:#5e303a; --vip-highlight:#ff7a63; }
 /* Core Reactor: decorative SVGs; the complete card remains a normal rules link. */
 #app .prospectus .reactor-card {
-  --card-base:#0b1d34; --card-edge:#24405b; --card-highlight:#65b6fa; --card-glow:#3186d04a;
+  --card-base:var(--ip-base); --card-edge:var(--ip-edge); --card-highlight:var(--ip-highlight); --card-glow:#3186d04a;
   display:block; position:relative; isolation:isolate; height:330px; padding:0;
   overflow:hidden; border:1px solid var(--card-edge); border-radius:5px;
   background:var(--card-base); color:#f4f8ff;
 }
-#app .prospectus .vip-card { --card-base:#2b151b; --card-edge:#5e303a; --card-highlight:#ff7a63; --card-glow:#f3443745; }
+#app .prospectus .vip-card { --card-base:var(--vip-base); --card-edge:var(--vip-edge); --card-highlight:var(--vip-highlight); --card-glow:#f3443745; }
 #app .reactor-card::before { content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(ellipse at 50% 35%,var(--card-glow),transparent 70%); opacity:.25; }
 #app .reactor-card::after { content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--card-highlight); opacity:0; }
 #app .reactor-card .reactor-art { display:block; width:100%; height:245px; object-fit:contain; opacity:.4; pointer-events:none; }
@@ -42,3 +44,27 @@
 }
 /* Touch screens keep the illustration legible without relying on hover. */
 @media(hover:none) { #app .reactor-card .reactor-art { opacity:.65; } }
+
+/* Rules: a single physical slider travels between the two equal-width labels. */
+#app .track-picker {
+  --picker-fill:var(--ip-base); --picker-accent:var(--ip-highlight);
+  position:relative; isolation:isolate; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  width:min(100%,420px); min-height:52px; padding:4px; gap:0; margin-bottom:20px;
+  background:#e5ecf6; border:0; border-radius:10px;
+}
+#app .track-picker[data-track=b] { --picker-fill:var(--vip-base); --picker-accent:var(--vip-highlight); }
+#app .track-picker-thumb {
+  position:absolute; z-index:-1; left:4px; top:4px; bottom:4px; width:calc((100% - 8px)/2);
+  border-radius:7px; background:var(--picker-fill); box-shadow:inset 0 -2px 0 var(--picker-accent);
+  transform:translateX(0); pointer-events:none;
+  transition:transform 280ms cubic-bezier(.22,1,.36,1),background-color 280ms ease,box-shadow 280ms ease;
+}
+#app .track-picker[data-track=b] .track-picker-thumb { transform:translateX(100%); }
+#app .track-picker button { position:relative; z-index:1; min-width:0; min-height:44px; padding:8px 12px; border-radius:7px; font-weight:var(--weight-medium); transition:color 160ms ease; }
+#app .track-picker button[data-select-track=a],#app .track-picker button[data-archive-track=ip] { color:var(--ip-base); }
+#app .track-picker button[data-select-track=b],#app .track-picker button[data-archive-track=vip] { color:var(--vip-base); }
+#app .track-picker button[aria-pressed=true] { background:transparent; color:#fff; }
+#app .website .track-picker button:focus-visible { outline:2px solid #8ab5ff; outline-offset:-3px; }
+#app .website .track-picker button[data-select-track=b]:focus-visible { outline-color:var(--vip-highlight); }
+#app .website .track-picker button[data-archive-track=vip]:focus-visible { outline-color:var(--vip-highlight); }
+@media(prefers-reduced-motion:reduce) { #app .track-picker-thumb,#app .track-picker button { transition:none; } }

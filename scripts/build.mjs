@@ -9,7 +9,7 @@ await checkProject();
 const output = join(root, 'dist');
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-for (const name of ['index.html', 'src', '.nojekyll', 'LICENSE']) {
+for (const name of ['index.html', 'past-problems.html', 'src', '.nojekyll', 'LICENSE']) {
   await cp(join(root, name), join(output, name), { recursive: true });
 }
 console.log('Built static website in dist/. No runtime dependencies or remote assets.');
