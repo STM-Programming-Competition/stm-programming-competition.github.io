@@ -1,3 +1,4 @@
+import { initHero } from './lib/hero.js';
 import { translations } from './content/locales.js';
 import { siteConfig } from './config.js';
 import { externalUrl, formatRoute, parseRoute } from './lib/router.js';
@@ -32,7 +33,7 @@ function animatePage(initial = false) {
   if (reducedMotion.matches || typeof site.animate !== 'function') return;
   const article = $(`[data-screen="${route.page}"]`);
   if (initial && route.page === 'home') {
-    ['.hero .event-name', '.hero h1', '.hero-description', '.hero-actions', '.hero-art']
+    ['.hero h1', '.hero-description', '.competition-board', '.hero-actions', '.hero-art']
       .forEach((selector, index) => {
         $(selector).animate([
           { opacity: 0, transform: 'translateY(12px)' },
@@ -89,7 +90,7 @@ function render() {
   $('.track-picker').setAttribute('aria-label', text.trackPickerLabel);
   $('.track-picker').dataset.track = rememberedTrack;
   $('.rules-navigation').setAttribute('aria-label', route.language === 'en' ? 'On this page' : '本页目录');
-  $('.hero-art img').alt = text.posterAlt;
+  $('.signal-art').setAttribute('aria-label', text.signalArtLabel);
   $('.activity-mark').alt = route.language === 'en' ? 'STM competition logo' : 'STM 活动标识';
   $$('.uestc-mark').forEach((image) => { image.alt = route.language === 'en' ? 'University of Electronic Science and Technology of China' : '电子科技大学'; });
   $('.footer-path').textContent = formatRoute(route).slice(1);
@@ -195,6 +196,7 @@ document.querySelector('.skip-link').addEventListener('click', (event) => {
 window.addEventListener('hashchange', () => syncRoute());
 if (!window.location.hash.startsWith('#/')) history.replaceState(null, '', formatRoute(route));
 syncRoute({ initial: true });
+initHero($('.signal-hero'));
 
 // Language is a two-option selection, not an on/off switch.
 $('.language').addEventListener('keydown', (event) => {

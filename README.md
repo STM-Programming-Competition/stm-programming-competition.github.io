@@ -146,3 +146,7 @@ npm run preview
 ## 字体
 
 主要英文字体为本地 Ubuntu，文件及授权位于 `src/assets/fonts/Ubuntu/`，随构建复制进 `dist/`。中文界面使用 MiSans 4.0.0（Normal / Demibold），通过提供的 jsDelivr 样式加载，失败时回退到系统中文字体。Ubuntu 字体受该目录的 `UFL.txt` 约束，不受代码 MIT 许可证替代。
+
+### 信号回路首页
+
+首屏样式位于 `src/styles/hero.css`，代码书写动画位于 `src/lib/hero.js`，局部感应点阵位于 `src/lib/hero-field.js`。统一矢量插图保存在 `index.html` 首页区域，无远程图片依赖。日期、场地和截止时间沿用 `src/content/locales.js`，场地内容可使用 `\n` 分行。

@@ -1,0 +1,36 @@
+#app .prospectus .top-partners{border-radius:3px 3px 0 0}
+#app .prospectus .signal-hero{margin:0 var(--pad);padding:32px 4% 20px;display:grid;grid-template-columns:46% 50%;column-gap:4%;row-gap:18px;grid-template-areas:"title art" "intro art" "info art" "info actions";grid-template-rows:auto auto 1fr auto;background:#f3f7ff;border-radius:0 0 16px 16px;isolation:isolate;color:#142f58;overflow:hidden}
+#app .prospectus .signal-hero h1{grid-area:title;font-size:clamp(34px,5cqw,56px);line-height:1.1;letter-spacing:-1.5px;z-index:2}
+#app .signal-hero .hero-description{grid-area:intro;font-size:17px;line-height:1.6;z-index:2;margin:0;color:#455e80}
+#app .signal-hero .signal-art{grid-area:art;height:auto;margin:0;overflow:visible;border-radius:0;z-index:2;align-self:start;width:100%}
+#app .signal-art .drawing{display:block;width:100%;height:auto;overflow:visible}
+#app .signal-art .editor{font-family:inherit;color:#173c71;width:100%;height:100%}
+#app .signal-art .editor-top{display:flex;justify-content:space-between;align-items:center;font-size:15px;line-height:20px;margin-bottom:9px}
+#app .signal-art .editor-lights{display:flex;gap:6px}
+#app .signal-art .editor-lights i{width:8px;height:8px;border-radius:50%;background:#ef4c32}
+#app .signal-art .editor-lights i:nth-child(2){background:#e7b126}
+#app .signal-art .editor-lights i:nth-child(3){background:#5797f3}
+#app .signal-art .code{font:22px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+#app .signal-art .code-row{display:block;height:33px}
+#app .signal-art .caret{display:inline-block;height:22px;width:2px;vertical-align:-3px;background:#d94d32;animation:hero-caret 1s steps(2,end) infinite}
+#app .signal-art .flow{fill:none;stroke:#e05232;stroke-width:6;stroke-linecap:round;stroke-dasharray:14 260;animation:hero-flow 3s linear infinite}
+#app .signal-art .breath{transform-box:fill-box;transform-origin:center;animation:hero-core 2.8s ease-in-out infinite}
+#app .competition-board{grid-area:info;z-index:2;background:#fff;border:1px solid #bdcfea;border-radius:13px;padding:17px 16px 7px;display:flex;flex-direction:column;min-width:0}
+#app .competition-board h2{font-size:12px;letter-spacing:.12em;color:#385c8e;line-height:1.5;margin:0 0 11px}
+#app .competition-board dl{display:grid;grid-template-rows:1fr 1.35fr 1fr;flex:1}
+#app .competition-board dl>div{display:grid;grid-template-columns:minmax(0,.87fr) minmax(0,1.25fr);align-items:center;gap:12px;padding:14px 0;border-top:1px solid #dbe5f4}
+#app .competition-board dt{font-size:17px;font-weight:var(--weight-bold);line-height:1.4;color:#112f5b}
+#app .competition-board dd{font-size:15px;line-height:1.55;white-space:pre-line;overflow-wrap:anywhere;color:#29496f;background:#eaf1fc;padding:8px 11px;border-radius:4px;min-width:0}
+#app .signal-hero .hero-actions{grid-area:actions;z-index:2;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:12px;width:87.5%;margin:0 6.25%;align-self:stretch;container-type:inline-size}
+#app .signal-hero .hero-actions :is(.cta,.secondary-action){min-width:0;min-height:64px;font-size:20px;font-weight:var(--weight-bold);line-height:1.3;padding:16px 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;border:1px solid #b8cbe6;background:#fff;color:#163865}
+#app .signal-hero .hero-actions .cta{background:#ffca3c;border-color:#ffca3c;color:#152c50;box-shadow:0 5px 14px #c3911826}
+#app .signal-hero .hero-motion{position:absolute;top:6px;right:12px;z-index:3;padding:3px;font-size:11px;color:#455e80;text-decoration:underline;text-underline-offset:3px}
+#app .signal-hero.motion-paused *{animation-play-state:paused!important}
+@keyframes hero-flow{to{stroke-dashoffset:-328}}
+@keyframes hero-core{50%{transform:scale(1.05)}}
+@keyframes hero-caret{50%{opacity:0}}
+@container(max-width:320px){#app .signal-hero .hero-actions :is(.cta,.secondary-action){font-size:17px;padding-inline:8px}}
+@media(max-width:760px){#app .prospectus .signal-hero{grid-template-columns:1fr;grid-template-areas:"title" "intro" "info" "art" "actions";grid-template-rows:auto;padding:30px 20px 18px;row-gap:18px}#app .signal-hero .signal-art{max-width:480px;justify-self:center}#app .signal-hero .hero-actions{max-width:420px;justify-self:center}#app .prospectus .signal-hero h1{font-size:clamp(34px,8cqw,48px)}#app .competition-board dl>div{padding:12px 0}}
+@media(max-width:400px){#app .competition-board dl>div{grid-template-columns:1fr;gap:7px}#app .signal-hero .hero-actions{grid-template-columns:1fr}#app .signal-hero .hero-actions :is(.cta,.secondary-action){min-height:60px}}
+#app .hero-field{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+@media(prefers-reduced-motion:reduce){#app .signal-hero *{animation:none!important}}

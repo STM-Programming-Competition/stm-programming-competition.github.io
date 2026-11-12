@@ -13,6 +13,7 @@
   <link href="https://cdn.jsdelivr.net/npm/misans@4.0.0/lib/Normal/MiSans-Demibold.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./src/styles/main.css">
   <link rel="stylesheet" href="./src/styles/track-cards.css">
+  <link rel="stylesheet" href="./src/styles/hero.css">
   <script type="module" src="./src/main.js"></script>
 </head>
 <body>
@@ -29,12 +30,40 @@
 
     <main id="main-content" class="page-content" tabindex="-1">
       <article data-screen="home">
-        <section class="hero">
-          <div class="hero-copy"><p class="event-name" data-copy="eventName">STM Programming Competition</p><h1><span class="hero-line-one" data-copy="heroLineOne">Curiosity.</span><span class="hero-line-two" data-copy="heroLineTwo">Then creation.</span></h1><p class="hero-description" data-copy="description">Start on campus. Bring an idea to life through code. Find your track and take on the challenge.</p><div class="hero-actions"><button type="button" class="cta cursor-interaction" data-register data-copy="register">Register ↗</button><a href="#/en/rules" data-page="rules" class="secondary-action cursor-interaction" data-copy="explore">Explore the rules →</a></div></div>
-          <figure class="hero-art"><img data-asset="poster" alt="校园建筑与芯片融合的赛事海报参考图" src="./src/assets/images/competition-poster.jpeg" width="768" height="1024" fetchpriority="high"><figcaption class="art-caption" data-copy="artCaption">CAMPUS / CODE / POSSIBILITY</figcaption></figure>
-          <div class="hero-index" aria-hidden="true">&lt;STM/&gt;</div>
+        <section class="hero signal-hero" aria-labelledby="hero-title">
+          <h1 id="hero-title"><span data-copy="heroLineOne">Curiosity.</span><span data-copy="heroLineTwo">Then creation.</span></h1>
+          <p class="hero-description" data-copy="description">Start on campus. Bring an idea to life through code. Find your track and take on the challenge.</p>
+          <section class="competition-board" aria-labelledby="competition-board-title"><h2 id="competition-board-title" data-copy="competitionInfo">COMPETITION INFO</h2><dl><div><dt data-copy="dateLabel">Date</dt><dd data-copy="dateValue">To be announced</dd></div><div><dt data-copy="venueLabel">Venue</dt><dd data-copy="venueValue">To be announced</dd></div><div><dt data-copy="deadlineLabel">Registration deadline</dt><dd data-copy="deadlineValue">To be announced</dd></div></dl></section>
+          <figure class="hero-art signal-art" aria-label="Animated code and chip circuit"><svg class="drawing unified-drawing" viewBox="0 0 480 500" aria-hidden="true">
+ <g class="above-code">
+  <g fill="none" stroke="#94afd4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M100 79v18q0 14 14 14h112q14 0 14 14v20M240 79v66M380 79v18q0 14-14 14H254q-14 0-14 14v20"/>
+  </g>
+  <path d="M100 79v18q0 14 14 14h112q14 0 14 14v20M240 79v66M380 79v18q0 14-14 14H254q-14 0-14 14v20" class="flow" style="stroke:#d94d32;stroke-dasharray:13 180;animation-duration:3s"/>
+  <g fill="#eaf1fc" stroke="#9db8df" stroke-width="2"><rect x="60" y="30" width="80" height="49" rx="16"/><rect x="200" y="30" width="80" height="49" rx="16"/><rect x="340" y="30" width="80" height="49" rx="16"/></g>
+  <g text-anchor="middle" font-family="monospace" font-size="22" font-weight="700"><text x="100" y="62" fill="#254d82">&lt;/&gt;</text><text x="240" y="62" fill="#af412b">{ }</text><text x="380" y="62" fill="#254d82">0101</text></g>
+ </g>
+ <g fill="none" stroke="#89a8d2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M76 315v92q0 63 63 63h202q63 0 63-63v-92"/>
+  <path d="M148 315v61q0 22 22 22h140q22 0 22-22v-61"/>
+ </g>
+ <path d="M76 315v92q0 63 63 63h202q63 0 63-63v-92" class="flow" style="stroke-dasharray:18 310;animation-duration:3.2s"/>
+ <path d="M148 315v61q0 22 22 22h140q22 0 22-22v-61" class="flow" style="stroke:#dfa619;animation-direction:reverse;animation-duration:2.8s"/>
+ <g stroke="#9db8df" stroke-width="7" stroke-linecap="round"><path d="M220 365v-14M240 365v-14M260 365v-14M220 431v14M240 431v14M260 431v14M207 378h-14M207 398h-14M207 418h-14M273 378h14M273 398h14M273 418h14"/></g>
+ <rect x="207" y="365" width="66" height="66" rx="18" fill="#183a69" stroke="#7099cf" stroke-width="3"/><rect x="223" y="381" width="34" height="34" rx="10" fill="#ffca3c" class="breath"/>
+ <circle cx="76" cy="358" r="8" fill="#ef4c32"/><circle cx="404" cy="358" r="8" fill="#ffca3c"/>
+ <rect x="30" y="145" width="420" height="170" rx="24" fill="#fff" stroke="#a9c3e8" stroke-width="2.5"/>
+ <foreignObject x="48" y="158" width="384" height="145">
+  <div xmlns="http://www.w3.org/1999/xhtml" class="editor unified-editor">
+   <div class="editor-top"><div class="editor-lights"><i></i><i></i><i></i></div><span>loop.c</span></div>
+   <div class="code"><span class="code-row" data-code="read(input);"></span><span class="code-row" data-code="core.process();"></span><span class="code-row" data-code="write(output);"></span></div>
+  </div>
+ </foreignObject>
+ <g fill="#537aaf"><circle cx="76" cy="315" r="5"/><circle cx="148" cy="315" r="5"/><circle cx="332" cy="315" r="5"/><circle cx="404" cy="315" r="5"/></g>
+</svg></figure>
+          <div class="hero-actions"><button type="button" class="cta" data-register data-copy="register">Register ↗</button><a href="#/en/rules" data-page="rules" class="secondary-action" data-copy="explore">Explore the rules →</a></div>
+          <button type="button" class="hero-motion" data-hero-pause aria-pressed="false" data-copy="pauseHero">Pause animation</button>
         </section>
-        <dl class="event-facts"><div><dt data-copy="dateLabel">Date</dt><dd data-copy="dateValue">To be announced</dd></div><div><dt data-copy="venueLabel">Venue</dt><dd data-copy="venueValue">To be announced</dd></div><div><dt data-copy="deadlineLabel">Registration deadline</dt><dd data-copy="deadlineValue">To be announced</dd></div></dl>
         <section class="tracks-section"><div class="section-heading"><h2 data-copy="tracksTitle">Find your challenge.</h2><p data-copy="tracksDescription">Follow your curiosity. Choose your track.</p></div><div class="tracks-layout">
           <a class="track-link reactor-card ip-card cursor-interaction" href="#/en/rules" data-page="rules" data-track="a">
             <img class="reactor-art" src="./src/assets/images/ip-reactor.svg" width="480" height="290" alt="" aria-hidden="true" loading="lazy" decoding="async">
@@ -49,14 +78,14 @@
       </article>
 
       <article data-screen="rules" hidden>
-        <div class="subpage-title"><p class="event-name" data-copy="eventName">STM Programming Competition</p><h1 data-copy="rulesTitle">Know the rules.<br>Take the challenge.</h1><p data-copy="rulesSubtitle">Everything to know before you take part.</p></div>
+        <div class="subpage-title"><h1 data-copy="rulesTitle">Know the rules.<br>Take the challenge.</h1><p data-copy="rulesSubtitle">Everything to know before you take part.</p></div>
         <nav class="rules-navigation" aria-label="On this page"><a href="#/en/rules?section=competition" data-section="competition" data-copy="rules">Rules</a><a href="#/en/rules?section=faq" data-section="faq">FAQ</a><a href="#/en/rules?section=past" data-section="past" data-copy="pastTitle">Last year’s problems</a></nav><section id="competition" class="rules-section"><div class="track-picker" role="group" aria-label="Choose a track" data-track="a"><span class="track-picker-thumb" aria-hidden="true"></span><button type="button" data-select-track="a" aria-pressed="true" class="cursor-interaction" data-copy="trackA">The IP Track</button><button type="button" data-select-track="b" aria-pressed="false" class="cursor-interaction" data-copy="trackB">The VIP Track</button></div><h2 class="selected-track">The IP Track</h2><p class="selected-track-role">Beginner Track</p><p class="selected-track-description">A steady start for new programmers.</p><dl class="rule-grid"><div><dt data-copy="eligibility">Eligibility</dt><dd data-copy="eligibilityValue">Eligible students, year groups, and prerequisites to be confirmed.</dd></div><div><dt data-copy="team">Teams</dt><dd data-copy="teamValue">Individual or team entry and team sizes to be confirmed.</dd></div><div><dt data-copy="format">Format</dt><dd data-copy="formatValue">Duration, languages, equipment, and permitted resources to be confirmed.</dd></div><div><dt data-copy="judging">Judging &amp; submission</dt><dd data-copy="judgingValue">Scoring criteria, submission process, and deadlines to be confirmed.</dd></div></dl></section>
         <section id="faq" class="faq-section"><h2>FAQ</h2><details><summary data-copy="faq1">Can I join without programming experience?</summary><p data-copy="faq1Answer">Suitable tracks and preparation advice will be published with the final rules.</p></details><details><summary data-copy="faq2">Do I need to bring a laptop?</summary><p data-copy="faq2Answer">Equipment and development environment requirements will be published before the competition.</p></details></section>
         <section id="past" class="past-section"><div><h2 data-copy="pastTitle">Last year’s problems</h2><p data-copy="pastSubtitle">Explore the format and difficulty to prepare for this year.</p></div><button class="cta cursor-interaction" type="button" data-resource data-copy="pastAction">View materials ↗</button></section>
       </article>
 
       <article data-screen="about" hidden>
-        <div class="subpage-title"><p class="event-name" data-copy="about">About</p><h1 data-copy="aboutTitle">Meet through curiosity.<br>Grow through challenge.</h1><p data-copy="aboutSubtitle">The story of STM, and the people who make it happen.</p></div>
+        <div class="subpage-title"><h1 data-copy="aboutTitle">Meet through curiosity.<br>Grow through challenge.</h1><p data-copy="aboutSubtitle">The story of STM, and the people who make it happen.</p></div>
         <section class="story-section"><h2 data-copy="storyTitle">Our story</h2><ol class="story-timeline"><li><span data-copy="foundingYear">Founding year to be added</span><h3 data-copy="storyFirst">An idea takes shape</h3><p data-copy="storyFirstText">The founding story and original aims will appear here.</p></li><li><span data-copy="pastYear">Past years to be added</span><h3 data-copy="storyNext">The challenge continues</h3><p data-copy="storyNextText">Past editions and milestones will appear here.</p></li><li><span data-copy="thisYear">This edition</span><h3 data-copy="storyNow">Write the next chapter</h3><p data-copy="storyNowText">This year’s highlights and message will appear here.</p></li></ol></section>
         <section class="team-section"><h2 data-copy="teamTitle">Organising team</h2><div class="team-list"><div><h3 data-copy="planning">Coordination &amp; planning</h3><p data-copy="members">Members to be announced</p></div><div><h3 data-copy="problemTeam">Problems &amp; judging</h3><p data-copy="members">Members to be announced</p></div><div><h3 data-copy="designTeam">Publicity &amp; design</h3><p data-copy="members">Members to be announced</p></div><div><h3 data-copy="supportTeam">Event &amp; technical support</h3><p data-copy="members">Members to be announced</p></div></div></section>
       </article>

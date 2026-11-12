@@ -1,4 +1,4 @@
-// Keep both languages in sync. Only rulesTitle and aboutTitle contain an intentional <br>.
+// Keep both languages in sync. Only rulesTitle and aboutTitle contain intentional HTML line breaks.
 export const translations = {
   "zh": {
     "brand": "编程大赛",
@@ -85,7 +85,10 @@ export const translations = {
     "trackARole": "初级赛道",
     "trackBRole": "挑战赛道",
     "trackADescription": "为编程新手提供稳健的起点。",
-    "trackBDescription": "将核心推向极限。"
+    "trackBDescription": "将核心推向极限。",
+    "competitionInfo": "赛事信息",
+    "pauseHero": "暂停动画",
+    "signalArtLabel": "代码逐字写入程序，信号从代码框底部流入芯片回路。"
   },
   "en": {
     "brand": "Programming Competition",
@@ -172,6 +175,9 @@ export const translations = {
     "trackARole": "Beginner Track",
     "trackBRole": "Challenge Track",
     "trackADescription": "A steady start for new programmers.",
-    "trackBDescription": "Push the core to the extreme."
+    "trackBDescription": "Push the core to the extreme.",
+    "competitionInfo": "COMPETITION INFO",
+    "pauseHero": "Pause animation",
+    "signalArtLabel": "Code is typed and compiled into signals flowing through a chip circuit."
   }
 };

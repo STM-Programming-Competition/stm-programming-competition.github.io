@@ -106,7 +106,6 @@ button,a { touch-action:manipulation; }
 #app .page-content { flex:1; }
 #app .hero { position:relative; }
 #app .hero-copy { position:relative; z-index:1; }
-#app .event-name { font-size:15px; color:var(--subtle); }
 #app h1 { font-size:clamp(32px,6.5cqw,var(--headline)); font-weight:var(--weight-bold); line-height:1.13; letter-spacing:-1.6px; }
 #app .hero h1>span { display:block; }
 #app .hero-description { max-width:34em; color:var(--subtle); font-size:16px; }
@@ -145,7 +144,6 @@ button,a { touch-action:manipulation; }
 #app .prospectus .top-partners { background:#112b51; border-top:0; padding:12px 20px; border-radius:3px; }
 #app .prospectus .hero { padding:24px var(--pad) 0; }
 #app .prospectus .hero-copy { display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; align-items:start; }
-#app .prospectus .event-name { grid-column:1 / -1; }
 #app .prospectus .hero h1 { grid-row:span 2; }
 #app .prospectus .hero-description { margin-top:6px; }
 #app .prospectus .hero-actions { align-self:end; gap:18px; }
