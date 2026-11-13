@@ -688,3 +688,701 @@ button,a { touch-action:manipulation; }
   }
 }
 
+/* ==========================================
+   FOLDABLE SECTIONS — ST COMPETITION
+   ========================================== */
+
+/* Keep the site's original page routing intact */
+[data-screen][hidden],
+.section-fold-target[hidden] {
+  display: none !important;
+}
+
+/* Folding title bar */
+.section-fold-toggle {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  width: 100%;
+  margin: 28px 0 12px;
+  padding: 19px 24px;
+
+  border: 1px solid rgba(70, 119, 180, 0.22);
+  border-radius: 18px;
+
+  color: #173b69;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(226, 239, 254, 0.86)
+  );
+
+  box-shadow: 0 6px 22px rgba(24, 65, 119, 0.05);
+  backdrop-filter: blur(16px);
+
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.section-fold-toggle:hover {
+  border-color: rgba(43, 106, 191, 0.48);
+  box-shadow: 0 10px 28px rgba(24, 65, 119, 0.12);
+  transform: translateY(-2px);
+}
+
+.section-fold-toggle:focus-visible {
+  outline: 3px solid #4388db;
+  outline-offset: 4px;
+}
+
+.section-fold-title {
+  min-width: 0;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+}
+
+/* Expand / collapse indicator */
+.section-fold-symbol {
+  display: flex;
+  flex: 0 0 34px;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+  background: rgba(34, 88, 166, 0.10);
+  color: #225ba2;
+
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.section-fold-toggle:hover .section-fold-symbol {
+  background: #2459a0;
+  color: white;
+}
+
+/* Existing sections become visual panels */
+.section-fold-target {
+  position: relative;
+  box-sizing: border-box;
+
+  margin-top: 0;
+  margin-bottom: 24px;
+
+  border: 1px solid rgba(81, 133, 200, 0.15);
+  border-radius: 22px;
+
+  background-color: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 14px 38px rgba(21, 58, 104, 0.06);
+  backdrop-filter: blur(14px);
+
+  /* Independent of existing transform animations */
+  translate: 0 var(--fold-parallax-y, 0px);
+
+  scroll-margin-top: 110px;
+
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.section-fold-target:hover {
+  border-color: rgba(74, 129, 198, 0.30);
+  box-shadow: 0 18px 46px rgba(21, 58, 104, 0.09);
+}
+
+/* When a section is closed, emphasize its heading */
+.section-fold-toggle[aria-expanded="false"] {
+  background: rgba(230, 240, 252, 0.90);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .section-fold-toggle {
+    padding: 15px 17px;
+    margin-top: 20px;
+    font-size: 16px;
+    border-radius: 15px;
+  }
+
+  .section-fold-target {
+    border-radius: 16px;
+    scroll-margin-top: 80px;
+  }
+
+  .section-fold-symbol {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+}
+
+/* Respect accessibility motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .section-fold-target {
+    translate: none !important;
+  }
+
+  .section-fold-toggle,
+  .section-fold-symbol {
+    transition: none !important;
+  }
+
+  .section-fold-toggle:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================
+   ST COMPETITION — RULES REDESIGN
+   Clean editorial layout / blue-white palette
+   ========================================== */
+
+/* 01. Overall page */
+.website:has([data-screen="rules"]:not([hidden])) {
+  background: #f7f9fc;
+}
+
+[data-screen="rules"] {
+  --rule-ink: #15365f;
+  --rule-muted: #526780;
+  --rule-border: #e1e9f3;
+  --rule-accent: #2768b7;
+}
+
+/* 02. Poster hero */
+[data-screen="rules"] .subpage-title {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 310px;
+
+  margin: 16px 0 24px !important;
+  padding: 48px 54px !important;
+
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      95deg,
+      rgba(8, 28, 56, .98) 0%,
+      rgba(11, 44, 79, .94) 35%,
+      rgba(13, 58, 96, .58) 66%,
+      rgba(12, 63, 102, .12) 100%
+    ),
+    url("../assets/images/competition-poster.jpeg")
+      center 42% / cover no-repeat;
+
+  box-shadow: 0 18px 42px rgba(20, 62, 110, .11);
+}
+
+[data-screen="rules"] .subpage-title::before {
+  display: none;
+}
+
+[data-screen="rules"] .subpage-title h1 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 18px !important;
+  max-width: 650px;
+
+  color: #fff !important;
+  font-size: clamp(36px, 4.4vw, 60px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.045em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .12);
+}
+
+[data-screen="rules"] .subpage-title p {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 !important;
+  max-width: 570px;
+
+  color: #e3efff !important;
+  opacity: 1 !important;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* 03. Section navigation */
+[data-screen="rules"] .rules-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  margin: 0 0 24px !important;
+  padding: 0 2px 8px;
+  border: 0;
+}
+
+[data-screen="rules"] .rules-navigation a {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 17px;
+  border: 1px solid var(--rule-border);
+  border-radius: 999px;
+
+  color: var(--rule-ink);
+  background: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    transform .25s ease;
+}
+
+[data-screen="rules"] .rules-navigation a:hover {
+  background: #eaf2fc;
+  border-color: #9fc2ef;
+  transform: translateY(-2px);
+}
+
+/* 04. Unified accordion heading */
+[data-screen="rules"] > .section-fold-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+
+  margin: 18px 0 0 !important;
+  padding: 21px 28px !important;
+
+  border: 1px solid var(--rule-border) !important;
+  border-bottom: 0 !important;
+  border-radius: 19px 19px 0 0 !important;
+
+  background: #fff !important;
+  color: var(--rule-ink) !important;
+
+  box-shadow: none !important;
+  transform: none !important;
+  translate: none !important;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+[data-screen="rules"] > .section-fold-toggle:hover {
+  background: #f0f6ff !important;
+}
+
+[data-screen="rules"] .section-fold-symbol {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+
+  background: #edf4fc;
+  border-radius: 50%;
+  color: #2867ad;
+
+  font-size: 18px;
+}
+
+/* 05. Unified panel body */
+[data-screen="rules"]
+  > .section-fold-toggle + .section-fold-target {
+  box-sizing: border-box;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 0 22px !important;
+  padding: 28px 30px 32px !important;
+
+  border: 1px solid var(--rule-border) !important;
+  border-top: 0 !important;
+  border-radius: 0 0 19px 19px !important;
+
+  background: #fff !important;
+  box-shadow: 0 12px 32px rgba(18, 49, 89, .045) !important;
+
+  transform: none !important;
+  translate: none !important;
+  overflow: visible;
+}
+
+[data-screen="rules"]
+  > .section-fold-toggle[aria-expanded="false"] {
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid var(--rule-border) !important;
+  border-radius: 19px !important;
+}
+
+/* Preserve hidden sections */
+[data-screen][hidden],
+.section-fold-target[hidden] {
+  display: none !important;
+}
+
+/* 06. Track selector */
+[data-screen="rules"] .track-picker {
+  max-width: 440px;
+  margin: 0 0 26px;
+  border-radius: 14px;
+}
+
+/* 07. Track heading */
+[data-screen="rules"] .selected-track {
+  margin: 0 0 8px !important;
+
+  color: var(--rule-ink) !important;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+
+[data-screen="rules"] .selected-track-role {
+  margin: 0 0 7px;
+
+  color: #2865ad !important;
+  font-weight: 650;
+}
+
+[data-screen="rules"] .selected-track-description {
+  margin: 0 0 24px;
+
+  color: var(--rule-muted) !important;
+  opacity: 1 !important;
+  line-height: 1.7;
+}
+
+/* 08. Rule information grid */
+[data-screen="rules"] .rule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+  width: 100%;
+  margin: 20px 0 0 !important;
+  padding: 0 !important;
+}
+
+[data-screen="rules"] .rule-grid > div {
+  box-sizing: border-box;
+  min-width: 0;
+
+  margin: 0 !important;
+  padding: 21px 23px !important;
+
+  border: 1px solid #edf1f7;
+  border-radius: 14px;
+  background: #f7f9fd;
+}
+
+[data-screen="rules"] .rule-grid dt {
+  margin: 0 0 10px;
+
+  color: var(--rule-ink) !important;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+[data-screen="rules"] .rule-grid dd {
+  margin: 0 !important;
+
+  color: var(--rule-muted) !important;
+  opacity: 1 !important;
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+/* 09. FAQ */
+[data-screen="rules"] #faq > h2 {
+  display: none;
+}
+
+[data-screen="rules"] #faq details {
+  margin: 0 !important;
+  padding: 0 8px;
+
+  border: 0;
+  border-bottom: 1px solid #e8edf4;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+[data-screen="rules"] #faq details:last-child {
+  border-bottom: 0;
+}
+
+[data-screen="rules"] #faq summary {
+  padding: 20px 6px !important;
+  color: var(--rule-ink) !important;
+  opacity: 1 !important;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+[data-screen="rules"] #faq details p {
+  margin: 0;
+  padding: 0 10px 22px 24px;
+
+  color: var(--rule-muted) !important;
+  opacity: 1 !important;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+/* 10. Past problems */
+[data-screen="rules"] #past h2 {
+  display: none;
+}
+
+[data-screen="rules"] #past p {
+  color: var(--rule-muted) !important;
+  opacity: 1 !important;
+  line-height: 1.75;
+}
+
+/* 11. Motion */
+[data-screen="rules"] .scroll-lag-text {
+  opacity: 1;
+  will-change: translate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-screen="rules"] .scroll-lag-text {
+    translate: none !important;
+    will-change: auto;
+  }
+}
+
+/* 12. Responsive */
+@media (max-width: 768px) {
+  [data-screen="rules"] .subpage-title {
+    min-height: 245px;
+    padding: 32px 25px !important;
+    background-position: 57% center;
+    border-radius: 18px;
+  }
+
+  [data-screen="rules"] .subpage-title h1 {
+    font-size: clamp(32px, 7vw, 44px);
+  }
+
+  [data-screen="rules"] .subpage-title p {
+    font-size: 14px;
+  }
+
+  [data-screen="rules"] > .section-fold-toggle {
+    padding: 18px 20px !important;
+  }
+
+  [data-screen="rules"]
+    > .section-fold-toggle + .section-fold-target {
+    padding: 22px 20px 26px !important;
+  }
+
+  [data-screen="rules"] .rule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  [data-screen="rules"] .rule-grid > div {
+    padding: 18px !important;
+  }
+}
+
+/* ==========================================
+   ABOUT PAGE — SPACING & ALIGNMENT FIX
+   ========================================== */
+
+/* 1. Match accordion header width */
+[data-screen="about"] > .section-fold-toggle {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 24px 0 0 !important;
+  padding: 20px 30px !important;
+
+  border-radius: 18px 18px 0 0;
+  border-bottom: 0;
+
+  background: #ffffff;
+  box-shadow: none;
+}
+
+/* 2. Main fix: give content proper padding */
+[data-screen="about"]
+  > .section-fold-toggle + .section-fold-target {
+
+  box-sizing: border-box;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 0 26px !important;
+  padding: 32px 36px 36px !important;
+
+  border: 1px solid rgba(52, 99, 158, 0.16);
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(20, 55, 100, 0.06);
+
+  overflow: visible;
+}
+
+/* 3. Closed accordion header */
+[data-screen="about"]
+  > .section-fold-toggle[aria-expanded="false"] {
+  margin-bottom: 24px !important;
+  border-radius: 18px;
+  border-bottom: 1px solid rgba(52, 99, 158, 0.16);
+}
+
+/* 4. Story timeline alignment */
+[data-screen="about"] .story-timeline {
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+[data-screen="about"] .story-timeline > li {
+  box-sizing: border-box;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 5. Story heading */
+[data-screen="about"] .story-section > h2 {
+  margin: 0 0 22px !important;
+  color: #173b69;
+}
+
+/* 6. Team directory alignment */
+[data-screen="about"] .team-directory {
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+/* 7. Keep member cards within the grid */
+[data-screen="about"] .team-grid {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+[data-screen="about"] .team-grid > * {
+  min-width: 0;
+}
+
+/* 8. Keep biography text readable */
+[data-screen="about"] .person-bio {
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+
+/* 9. Hidden sections must remain hidden */
+[data-screen][hidden],
+.section-fold-target[hidden] {
+  display: none !important;
+}
+
+/* 10. Mobile adaptation */
+@media (max-width: 768px) {
+
+  [data-screen="about"] > .section-fold-toggle {
+    padding: 17px 20px !important;
+  }
+
+  [data-screen="about"]
+    > .section-fold-toggle + .section-fold-target {
+    padding: 24px 20px 28px !important;
+  }
+
+  [data-screen="about"] .story-timeline {
+    width: 100%;
+  }
+}
+
+/* ======================================
+   RESTORE TEXT SCROLL LAG
+   ====================================== */
+
+.website .scroll-lag-text {
+  translate: 0 var(--scroll-lag-y, 0px);
+}
+
+/* Cards and borders remain stationary */
+.section-fold-target,
+.section-fold-toggle {
+  translate: none !important;
+}
+
+/* Keep adequate space around animated text */
+[data-screen="rules"] .rule-grid > div {
+  padding: 24px !important;
+}
+
+[data-screen="about"] .story-timeline > li {
+  padding-bottom: 16px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .website .scroll-lag-text {
+    translate: none !important;
+  }
+}
+
