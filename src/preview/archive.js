@@ -1,97 +1,97 @@
 import { translations } from '../content/locales.js';
 import { siteConfig } from '../config.js';
 import { externalUrl } from '../lib/router.js';
+import { renderMarkdown } from '../assets/vendor/markdown/renderer.js';
 
-const site = document.querySelector('.website');
-let language = new URLSearchParams(location.search).get('lang') === 'zh' ? 'zh' : 'en';
-let codeLanguage = 'python';
-let statusTimer;
-const dialog = document.querySelector('#entry-dialog');
-function render() {
-  const t = translations[language];
-  document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
-  site.lang = document.documentElement.lang;
-  document.title = language === 'zh' ? '2025 往届试题 | STM' : '2025 Past Problems | STM';
-  document.querySelectorAll('[data-zh][data-en]').forEach(el => { el.textContent = el.dataset[language]; });
-  document.querySelectorAll('[data-copy]').forEach(el => { if (t[el.dataset.copy]) el.textContent = t[el.dataset.copy]; });
-  document.querySelectorAll('[data-page]').forEach(el => { el.href = `./index.html#/${language}/${el.dataset.page === 'home' ? '' : el.dataset.page}`; });
-  document.querySelector('[data-back]').href = `./index.html#/${language}/rules?section=past`;
-  document.querySelector('.language').dataset.locale = language;
-  document.querySelectorAll('[data-language]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.language === language)));
-  document.querySelector('.footer-path').textContent = `/past-problems?lang=${language}`;
-  document.querySelector('.primary-nav [data-page=rules]').setAttribute('aria-current','page');
+const $ = selector => document.querySelector(selector);
+const body = $('.markdown-body');
+const status = $('.reading-status');
+const toc = $('.problem-toc nav');
+const files = {ip:'2025-ip-track.md',vip:'2025-vip-track.md'};
+const legacy = {prime:'md-level-1-the-gate-of-prime-sigils',scroll:'md-level-2-the-scroll-of-unveiling',tribute:'md-level-3-the-guardians-tribute',hypnos:'md-objective'};
+let locale='en', track='ip', loaded='', request=0, controller, observer, timer;
+function urlState(){const q=new URLSearchParams(location.search);locale=q.get('lang')==='zh'?'zh':'en';track=q.get('track')==='vip'?'vip':'ip';}
+function chrome(){
+ const t=translations[locale];document.documentElement.lang=locale==='zh'?'zh-CN':'en';$('.website').lang=document.documentElement.lang;
+ document.title=locale==='zh'?'2025 往届试题 | STM':'2025 Past Problems | STM';
+ document.querySelectorAll('[data-zh][data-en]').forEach(el=>el.textContent=el.dataset[locale]);
+ document.querySelectorAll('[data-copy]').forEach(el=>{if(t[el.dataset.copy])el.textContent=t[el.dataset.copy];});
+ document.querySelectorAll('[data-page]').forEach(el=>el.href=`./index.html#/${locale}/${el.dataset.page==='home'?'':el.dataset.page}`);
+ $('[data-back]').href=`./index.html#/${locale}/rules?section=past`;
+ $('.primary-nav [data-page=rules]').setAttribute('aria-current','page');
+ $('.language').dataset.locale=locale;
+ document.querySelectorAll('[data-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.language===locale)));
+ document.querySelectorAll('[data-archive-track]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.archiveTrack===track)));
+ $('.archive-track-picker').dataset.track=track==='vip'?'b':'a';
+ $('.footer-path').textContent=`/past-problems?lang=${locale}&track=${track}`;
+ document.querySelectorAll('[data-copy-markdown]').forEach(el=>el.textContent=locale==='zh'?'复制':'Copy');
 }
-render();
-document.querySelector('.problem-toc').open = !matchMedia('(max-width:760px)').matches;
-document.addEventListener('click', async event => {
-  const lang = event.target.closest('[data-language]');
-  if (lang) {
-    language = lang.dataset.language;
-    const url = new URL(location.href); url.searchParams.set('lang',language); history.replaceState(null,'',url);
-    render(); return;
-  }
-  const menu = event.target.closest('[data-menu]');
-  if (menu) { const open = document.querySelector('.primary-nav').classList.toggle('open'); menu.setAttribute('aria-expanded',String(open)); }
-  const tab = event.target.closest('[data-code-tab]');
-  if (tab) {
-    codeLanguage = tab.dataset.codeTab;
-    document.querySelectorAll('[data-code-tab]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.codeTab===codeLanguage)));
-    document.querySelectorAll('[data-snippet]').forEach(el=>{el.hidden=el.dataset.snippet!==codeLanguage;});
-  }
-  const copy = event.target.closest('[data-copy-code]');
-  if (copy) {
-    const target = copy.dataset.copyCode === 'solution-code'
-      ? document.querySelector(`[data-snippet="${codeLanguage}"] pre`) : document.getElementById(copy.dataset.copyCode);
-    const status = document.querySelector('.copy-status');
-    try { await navigator.clipboard.writeText(target.textContent); status.textContent=language==='zh'?'已复制到剪贴板':'Copied to clipboard'; }
-    catch { status.textContent=language==='zh'?'请选中文字手动复制':'Please select the text and copy manually'; }
-    clearTimeout(statusTimer); statusTimer=setTimeout(()=>{status.textContent='';},2400);
-  }
-  if (event.target.closest('[data-register]')) {
-    const url=externalUrl(siteConfig.links.registration,language);
-    if(url && !['upcoming','closed'].includes(siteConfig.registrationStatus)) { window.open(url,'_blank','noopener,noreferrer');return; }
-    document.querySelector('.notice-title').textContent=translations[language].registrationTitle;
-    document.querySelector('.notice-text').textContent=translations[language].registrationPending;
-    dialog.showModal();
-  }
-  if(event.target.closest('[data-close]'))dialog.close();
-});
-document.querySelector('.language').addEventListener('keydown',event=>{
-  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-  event.preventDefault();document.querySelector(`[data-language="${['Home','ArrowLeft'].includes(event.key)?'zh':'en'}"]`).click();
-});
-const observer = new IntersectionObserver(entries=>{
-  for(const entry of entries)if(entry.isIntersecting){
-    document.querySelectorAll('.problem-toc a').forEach(a=>{if(a.hash===`#${entry.target.id}`)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
-  }
-},{rootMargin:'-5% 0px -60% 0px'});
-document.querySelectorAll('.problem-article>section').forEach(section=>observer.observe(section));
-
-let archiveTrack=new URLSearchParams(location.search).get('track')==='vip'?'vip':'ip';
-let question=new URLSearchParams(location.search).get('problem')||(archiveTrack==='vip'?'hypnos':'prime');
-function archiveRender(){
-  if(!document.querySelector(`[data-problem="${question}"][data-track="${archiveTrack}"]`))question=archiveTrack==='vip'?'hypnos':'prime';
-  document.querySelectorAll('[data-problem]').forEach(el=>el.hidden=el.dataset.problem!==question);
-  document.querySelector('[data-ip-intro]').hidden=archiveTrack!=='ip';
-  document.querySelectorAll('[data-question]').forEach(el=>{el.hidden=el.dataset.track!==archiveTrack;el.href=`?lang=${language}&track=${el.dataset.track}&problem=${el.dataset.question}`;if(el.dataset.question===question)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
-  document.querySelectorAll('[data-archive-track]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.archiveTrack===archiveTrack)));
-  document.querySelector('.archive-track-picker').dataset.track=archiveTrack==='vip'?'b':'a';
-  document.querySelector('.archive-track-picker').setAttribute('aria-label',language==='zh'?'选择赛道':'Choose a track');
-  const url=new URL(location.href);url.searchParams.set('lang',language);url.searchParams.set('track',archiveTrack);url.searchParams.set('problem',question);history.replaceState(null,'',url);
+function position(){
+ const old=new URLSearchParams(location.search).get('problem');
+ const id=location.hash.slice(1)||legacy[old];
+ if(id)document.getElementById(id)?.scrollIntoView({block:'start'});
 }
-archiveRender();
-document.addEventListener('click',event=>{
- const track=event.target.closest('[data-archive-track]');const selected=event.target.closest('[data-question]');
- if(selected){event.preventDefault();question=selected.dataset.question;}
- if(track){archiveTrack=track.dataset.archiveTrack;question=archiveTrack==='vip'?'hypnos':'prime';}
- if(track||selected||event.target.closest('[data-language]'))archiveRender();
- if(selected)document.querySelector('.problem-article').scrollIntoView({block:'start',behavior:'instant'});
+async function load(){
+ chrome();if(loaded===track){position();return;}
+ loaded='';controller?.abort();controller=new AbortController();const token=++request;
+ observer?.disconnect();body.replaceChildren();toc.replaceChildren();status.hidden=false;
+ status.textContent=locale==='zh'?'正在读取 Markdown…':'Loading Markdown…';body.setAttribute('aria-busy','true');
+ try{
+  const response=await fetch(new URL(`../content/problems/${files[track]}`,import.meta.url),{signal:controller.signal,cache:'no-cache'});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const markdown=await response.text();const rendered=renderMarkdown(markdown);
+  if(token!==request)return;
+  body.innerHTML=rendered.html;loaded=track;
+  for(const item of rendered.toc){if(item.level===1)continue;const a=document.createElement('a');a.href='#'+item.id;a.textContent=item.title;a.dataset.level=item.level;toc.append(a);}
+  body.querySelectorAll('pre').forEach((pre,i)=>{
+   const wrapper=document.createElement('div');wrapper.className='code-wrapper';
+   const bar=document.createElement('div');bar.className='code-toolbar';
+   const label=document.createElement('span');label.textContent=pre.querySelector('code')?.className.match(/language-([\w+-]+)/)?.[1]||'text';
+   const button=document.createElement('button');button.type='button';button.dataset.copyMarkdown=String(i);button.textContent=locale==='zh'?'复制':'Copy';
+   pre.id=`code-${track}-${i}`;bar.append(label,button);pre.replaceWith(wrapper);wrapper.append(bar,pre);
+  });
+  observer=new IntersectionObserver(entries=>{
+   const visible=entries.filter(entry=>entry.isIntersecting);
+   const current=visible[visible.length-1];
+   if(!current)return;
+   let active=null;
+   toc.querySelectorAll('a').forEach(a=>{
+    if(a.hash==='#'+current.target.id){a.setAttribute('aria-current','location');active=a;}
+    else a.removeAttribute('aria-current');
+   });
+   if(!active)return;
+   const viewport=toc.getBoundingClientRect();
+   const item=active.getBoundingClientRect();
+   let top=toc.scrollTop;
+   if(item.top<viewport.top)top-=viewport.top-item.top;
+   else if(item.bottom>viewport.bottom)top+=item.bottom-viewport.bottom;
+   if(top!==toc.scrollTop)toc.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  },{rootMargin:'-5% 0px -65% 0px'});
+  body.querySelectorAll('h2,h3').forEach(h=>observer.observe(h));status.hidden=true;position();
+ }catch(error){
+  if(error.name==='AbortError'||token!==request)return;
+  status.textContent=locale==='zh'?'题目加载失败，请重试。':'Unable to load the problem statements. Please retry.';
+  const retry=document.createElement('button');retry.type='button';retry.dataset.retry='';retry.textContent=locale==='zh'?'重试':'Retry';status.append(retry);
+ }finally{if(token===request)body.removeAttribute('aria-busy');}
+}
+function change(values){const url=new URL(location.href);for(const [key,value]of Object.entries(values))url.searchParams.set(key,value);if(values.track){url.searchParams.delete('problem');url.hash='';}history.pushState(null,'',url);urlState();load();}
+urlState();load();$('.problem-toc').open=!matchMedia('(max-width:760px)').matches;
+document.addEventListener('click',async event=>{
+ const lang=event.target.closest('[data-language]');if(lang){change({lang:lang.dataset.language});return;}
+ const tab=event.target.closest('[data-archive-track]');if(tab){change({track:tab.dataset.archiveTrack});return;}
+ if(event.target.closest('[data-retry]')){loaded='';load();return;}
+ const copy=event.target.closest('[data-copy-markdown]');if(copy){
+  const text=document.getElementById(`code-${track}-${copy.dataset.copyMarkdown}`).textContent;
+  const message=$('.copy-status');try{await navigator.clipboard.writeText(text);message.textContent=locale==='zh'?'已复制到剪贴板':'Copied to clipboard';}catch{message.textContent=locale==='zh'?'请选中文字手动复制':'Please select and copy the text manually';}
+  clearTimeout(timer);timer=setTimeout(()=>{message.textContent='';},2400);
+ }
+ const menu=event.target.closest('[data-menu]');if(menu){const open=$('.primary-nav').classList.toggle('open');menu.setAttribute('aria-expanded',String(open));}
+ if(event.target.closest('[data-register]')){
+  const target=externalUrl(siteConfig.links.registration,locale);
+  if(target&&!['upcoming','closed'].includes(siteConfig.registrationStatus))window.open(target,'_blank','noopener,noreferrer');
+  else{$('.notice-title').textContent=translations[locale].registrationTitle;$('.notice-text').textContent=translations[locale].registrationPending;$('#entry-dialog').showModal();}
+ }
+ if(event.target.closest('[data-close]'))$('#entry-dialog').close();
 });
-
-document.querySelector('.archive-track-picker').addEventListener('keydown',event=>{
- if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
- event.preventDefault();
- const track=['ArrowLeft','Home'].includes(event.key)?'ip':'vip';
- document.querySelector(`[data-archive-track="${track}"]`).click();
- document.querySelector(`[data-archive-track="${track}"]`).focus();
-});
+for(const [selector,attribute,values]of [['.language','language',['zh','en']],['.archive-track-picker','archive-track',['ip','vip']]])$(selector).addEventListener('keydown',event=>{if(!['Home','End','ArrowLeft','ArrowRight'].includes(event.key))return;event.preventDefault();const value=values[['End','ArrowRight'].includes(event.key)?1:0];const button=$(`[data-${attribute}="${value}"]`);button.click();button.focus();});
+window.addEventListener('popstate',()=>{urlState();load();});

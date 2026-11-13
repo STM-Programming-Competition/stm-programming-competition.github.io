@@ -8,11 +8,12 @@ STM 编程大赛中英文静态网站。当前版本采用选定的 **「开放�
 
 ## 本地运行
 
-需要 **Node.js 20 或更新版本**，npm 随 Node.js 提供。没有第三方运行或构建依赖，可以直接执行以下命令，无需先执行 `npm install`。
+需要 **Node.js 20 或更新版本**，npm 随 Node.js 提供。首次运行请先执行 `npm ci`，安装 Markdown 渲染器的构建依赖。页面仍为纯静态网站，无需后端。
 
 在仓库目录打开终端：
 
 ```sh
+npm ci
 npm run dev
 ```
 
@@ -30,7 +31,7 @@ npm run dev -- --port 5174
 | --- | --- |
 | `npm run dev` | 启动本地源码服务器，默认端口 5173 |
 | `npm run check` | 检查 JavaScript 语法、双语文案和页面素材 |
-| `npm test` | 验证分享路由、语言切换上下文和外链处理 |
+| `npm test` | 验证题目 Markdown 渲染、分享路由、语言上下文和外链处理 |
 | `npm run build` | 检查源码后生成独立静态产物 `dist/` |
 | `npm run preview` | 在端口 4173 预览 `dist/`，需先构建 |
 
@@ -150,3 +151,7 @@ npm run preview
 ### 信号回路首页
 
 首屏样式位于 `src/styles/hero.css`，代码书写动画位于 `src/lib/hero.js`，局部感应点阵位于 `src/lib/hero-field.js`。统一矢量插图保存在 `index.html` 首页区域，无远程图片依赖。日期、场地和截止时间沿用 `src/content/locales.js`，场地内容可使用 `\n` 分行。
+
+## Markdown 题目文档
+
+往届题面现由 `src/content/problems/2025-ip-track.md` 和 `2025-vip-track.md` 直接渲染；只需修改 Markdown 后刷新页面，无需同步 HTML。支持 GFM 表格、列表、代码高亮和 LaTeX 公式，自动生成标题目录。具体说明见 [Markdown 题面维护](docs/MARKDOWN-PROBLEMS.md)。

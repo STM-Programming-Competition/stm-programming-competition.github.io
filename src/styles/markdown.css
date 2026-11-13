@@ -1,0 +1,60 @@
+/* Documentation-style Markdown typography, scoped to archived statements. */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/jetbrains-mono/JetBrainsMono-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+#app .reading-layout { grid-template-columns:220px minmax(0,1fr); gap:28px; }
+#app .problem-toc nav { max-height:70vh; overflow-y:auto; padding-right:8px; scrollbar-width:none; -ms-overflow-style:none; }
+#app .problem-toc nav::-webkit-scrollbar { display:none; }
+#app .problem-toc a { font-size:13px; line-height:1.5; }
+#app .problem-toc a[data-level="3"] { padding-left:22px; }
+#app .markdown-body { min-width:0; color:#1f2937; font-family:"Ubuntu",-apple-system,BlinkMacSystemFont,sans-serif; font-size:16px; font-weight:400; line-height:1.7; overflow-wrap:break-word; }
+#app .markdown-body>:first-child { margin-top:0; }
+#app .markdown-body :is(h1,h2,h3,h4) { font-weight:500; line-height:1.3; scroll-margin-top:24px; margin:28px 0 16px; letter-spacing:normal; color:#122d53; }
+#app .markdown-body h1 { font-size:30px; padding-bottom:12px; border-bottom:1px solid #d1d9e0; }
+#app .markdown-body h2 { font-size:24px; padding-bottom:8px; border-bottom:1px solid #d1d9e0; }
+#app .markdown-body h3 { font-size:19px; }
+#app .markdown-body :is(p,ul,ol,blockquote,pre,table) { margin:0 0 16px; }
+#app .markdown-body :is(ul,ol) { padding-left:26px; }
+#app .markdown-body li+li { margin-top:5px; }
+#app .markdown-body li>p { margin:0 0 8px; }
+#app .markdown-body blockquote { padding:0 16px; color:#59636e; border-left:4px solid #d1d9e0; }
+#app .markdown-body blockquote p:last-child { margin-bottom:0; }
+#app .markdown-body hr { height:1px; margin:24px 0; border:0; background:#d1d9e0; }
+#app .markdown-body a { color:#164ab4; text-decoration:underline; text-underline-offset:3px; }
+#app .markdown-body code { font:14px/1.65 "JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace; background:#e8edf3; padding:2px 5px; border-radius:4px; }
+#app .markdown-body pre { max-width:100%; overflow-x:auto; padding:16px; border-radius:6px; background:#edf1f6; }
+#app .markdown-body pre code { background:none; padding:0; font-size:15px; white-space:pre; overflow-wrap:normal; }
+#app .markdown-body .code-wrapper { min-width:0; margin:0 0 16px; }
+#app .markdown-body .code-wrapper pre { margin:0; border-radius:0 0 6px 6px; }
+#app .markdown-body .code-toolbar { border:0; border-radius:6px 6px 0 0; background:#e3eaf3; }
+#app .markdown-body table { display:block; max-width:100%; overflow:auto; border-spacing:0; border-collapse:collapse; font-size:15px; }
+#app .markdown-body :is(td,th) { border:1px solid #d1d9e0; padding:8px 12px; text-align:left; min-width:90px; }
+#app .markdown-body th { font-weight:500; background:#e9eef5; }
+#app .markdown-body tr:nth-child(even) { background:#f0f3f7; }
+#app .markdown-body .katex-display { overflow-x:auto; overflow-y:hidden; padding:8px 0; margin:14px 0; }
+#app .markdown-body .katex-display>.katex { width:max-content; min-width:100%; }
+#app .markdown-body .katex { font-size:1.1em; }
+#app .markdown-body .hljs-keyword,#app .markdown-body .hljs-selector-tag { color:#cf222e; }
+#app .markdown-body .hljs-string,#app .markdown-body .hljs-regexp { color:#0a3069; }
+#app .markdown-body .hljs-comment { color:#6e7781; }
+#app .markdown-body .hljs-number,#app .markdown-body .hljs-built_in { color:#0550ae; }
+#app .markdown-body .hljs-title { color:#8250df; }
+#app .markdown-body img { max-width:100%; }
+#app .reading-status { padding:16px 0; color:var(--subtle); }
+#app .reading-status button { text-decoration:underline; padding:6px; color:var(--accent); }
+@media(max-width:760px) {
+  #app .reading-layout { grid-template-columns:1fr; }
+  #app .problem-toc nav { max-height:300px; }
+  #app .markdown-body h1 { font-size:26px; }
+}

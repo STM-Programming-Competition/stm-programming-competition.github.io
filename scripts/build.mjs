@@ -2,8 +2,10 @@ import { cp, mkdir, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { checkProject } from './check.mjs';
+import { buildMarkdown } from './build-markdown.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+await buildMarkdown();
 await checkProject();
 // Only generated output is replaced. Git metadata and source files are never touched.
 const output = join(root, 'dist');

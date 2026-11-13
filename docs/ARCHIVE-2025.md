@@ -15,6 +15,6 @@
 
 去除页码、样例行号和印刷换行断词。保留原题术语、数值、约束和原有说明，包括 VIP 输入格式原文的 “Line 1: Four integers”（其后实际列出五个字段），未擅自修订题意。
 
-数学公式重排为 KaTeX，保留公式编号；示例输入输出使用保留换行的代码块。可编辑的网页提取内容存于 `src/content/problems/archive-2025.json`；便于后续发布的 Markdown 版本分别存于 `src/content/problems/2025-ip-track.md` 与 `src/content/problems/2025-vip-track.md`；当前发布页面为 `past-problems.html`。JSON 中公式采用 LaTeX 属性保存，发布 HTML 已预渲染。
+题目正文以 `src/content/problems/2025-ip-track.md` 和 `src/content/problems/2025-vip-track.md` 为唯一来源。网页直接读取 Markdown，自动生成公式、代码、表格和目录。原先重复维护的 JSON 和硬编码 HTML 正文已移除。
 
 PDF 源文件未复制入仓库，也未提供下载入口。正式页面不依赖原 PDF；`View materials` 在同一标签页进入原题页，并沿用当前界面语言和赛道。原题页的赛道及题目选择通过 URL 查询参数保留，支持刷新和分享。

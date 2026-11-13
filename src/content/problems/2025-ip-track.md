@@ -4,6 +4,16 @@
 
 ---
 
+## The Trials of the Sunstone Citadel
+
+You are the Code Knight, a seeker of lost lore and forgotten magic. After a perilous journey, you stand before the legendary Sunstone Citadel, a fortress of ancient wisdom locked away by three great trials. You are not the only seeker today; other brave adventurers are also attempting to prove their merit. A glowing runic inscription on the main archway dictates the terms of the challenge for all aspirants:
+
+> The Citadel’s magic will observe your progress. Your ultimate rank among seekers is determined first by your Total Score. Should two seekers achieve equal success, the one who demonstrated greater Swiftness (submit earlier) shall be deemed superior.
+
+The gateway hums, awaiting your first answer. To prove your worth and gain entry, you must solve the riddles left by the Citadel’s architects. Your quest begins now.
+
+---
+
 ## Level 1: The Gate of Prime Sigils
 
 The first trial is the gateway itself. It is sealed by a complex magical lock that responds only to special numbers known as "Prime Sigils." An inscription carved into the archway reveals the secret: a Prime Sigil is a number that is both a prime and a palindrome.

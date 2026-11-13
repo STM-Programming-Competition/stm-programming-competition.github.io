@@ -13,6 +13,6 @@ The standalone problem preview was removed after the dedicated 2025 Past Problem
 
 ## Current archive page
 
-The live past-problem archive is `past-problems.html`; its transcribed 2025 statements are stored in `src/content/problems/archive-2025.json`. Archive-specific reading styles now live in `src/styles/past-problems.css`. The local KaTeX stylesheet, fonts, and license remain in `src/assets/vendor/katex/` because the archive page still uses them to display its formulas.
+The live past-problem archive is `past-problems.html`; it reads the original English statements directly from `src/content/problems/2025-ip-track.md` and `src/content/problems/2025-vip-track.md`. Archive-specific reading styles live in `src/styles/past-problems.css` and `src/styles/markdown.css`. The local KaTeX stylesheet, fonts, and license remain in `src/assets/vendor/katex/` because the archive page still uses them to display its formulas.
 
 The prototype's standalone HTML, JavaScript, sample task files, and generator have been removed. This document is the retained record of that work.
