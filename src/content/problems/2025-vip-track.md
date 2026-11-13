@@ -1,4 +1,4 @@
-# 2025 VIP Track Problem
+# 2025 The VIP Track Problem
 
 > Original problem statement in English.
 

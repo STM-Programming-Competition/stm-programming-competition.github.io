@@ -1,4 +1,4 @@
-# 2025 IP Track Problems
+# 2025 The IP Track Problems
 
 > Original problem statements in English.
 
