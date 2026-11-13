@@ -215,3 +215,502 @@ $('.track-picker').addEventListener('keydown', (event) => {
   navigate({ ...route, track });
   $(`[data-select-track="${track}"]`).focus();
 });
+
+/* ==========================================
+   SECTION FOLDING + SCROLL PARALLAX
+   ========================================== */
+
+// Only target the main sections of each page.
+// Do not change nested sections or FAQ details.
+const sectionDefinitions = [
+  {
+    page: "home",
+    selector: "section.hero",
+    zh: "赛事总览",
+    en: "Competition Overview"
+  },
+  {
+    page: "home",
+    selector: "section.tracks-section",
+    zh: "比赛赛道",
+    en: "Competition Tracks"
+  },
+  {
+    page: "home",
+    selector: "section.awards-section",
+    zh: "奖项信息",
+    en: "Awards"
+  },
+  {
+    page: "rules",
+    selector: "section#competition",
+    zh: "比赛规则",
+    en: "Competition Rules"
+  },
+  {
+    page: "rules",
+    selector: "section#faq",
+    zh: "常见问题",
+    en: "FAQ"
+  },
+  {
+    page: "rules",
+    selector: "section#past",
+    zh: "往届赛题",
+    en: "Past Problems"
+  },
+  {
+    page: "about",
+    selector: "section.story-section",
+    zh: "赛事历程",
+    en: "Our Story"
+  },
+  {
+    page: "about",
+    selector: "section.team-section",
+    zh: "学术支持与组织团队",
+    en: "Academic Support & Organising Team"
+  }
+];
+
+const sectionFolds = [];
+let foldScrollFrame = 0;
+
+// Create folding controls without rewriting HTML.
+function initSectionFolds() {
+  sectionDefinitions.forEach((definition, index) => {
+    const article = document.querySelector(
+      `[data-screen="${definition.page}"]`
+    );
+
+    const section = article?.querySelector(
+      `:scope > ${definition.selector}`
+    );
+
+    if (!section) {
+      console.warn(
+        "Section not found:",
+        definition.page,
+        definition.selector
+      );
+      return;
+    }
+
+    // Prevent duplicate controls.
+    if (section.dataset.foldReady === "true") return;
+
+    section.dataset.foldReady = "true";
+    section.classList.add("section-fold-target");
+
+    if (!section.id) {
+      section.id = `fold-section-${index}`;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "section-fold-toggle";
+    button.setAttribute("aria-controls", section.id);
+    button.setAttribute("aria-expanded", "true");
+
+    const title = document.createElement("span");
+    title.className = "section-fold-title";
+
+    const symbol = document.createElement("span");
+    symbol.className = "section-fold-symbol";
+    symbol.setAttribute("aria-hidden", "true");
+    symbol.textContent = "−";
+
+    button.append(title, symbol);
+    section.before(button);
+
+    const entry = {
+      definition,
+      section,
+      button,
+      title,
+      symbol,
+      animating: false
+    };
+
+    sectionFolds.push(entry);
+
+    button.addEventListener("click", () => {
+      if (entry.animating) return;
+      setSectionExpanded(entry, section.hidden);
+    });
+  });
+
+  updateSectionFoldLabels();
+  requestSectionParallax();
+}
+
+// Expand or collapse an existing section.
+async function setSectionExpanded(
+  entry,
+  expand,
+  animate = true
+) {
+  if (entry.animating) return;
+
+  const { section, button, symbol } = entry;
+
+  button.setAttribute("aria-expanded", String(expand));
+  symbol.textContent = expand ? "−" : "+";
+
+  const shouldAnimate =
+    animate &&
+    !reducedMotion.matches &&
+    typeof section.animate === "function";
+
+  if (!shouldAnimate) {
+    section.hidden = !expand;
+    requestSectionParallax();
+    return;
+  }
+
+  entry.animating = true;
+
+  if (expand) section.hidden = false;
+
+  const frames = expand
+    ? [
+        {
+          opacity: 0,
+          clipPath: "inset(0 0 100% 0)"
+        },
+        {
+          opacity: 1,
+          clipPath: "inset(0 0 0 0)"
+        }
+      ]
+    : [
+        {
+          opacity: 1,
+          clipPath: "inset(0 0 0 0)"
+        },
+        {
+          opacity: 0,
+          clipPath: "inset(0 0 100% 0)"
+        }
+      ];
+
+  const animation = section.animate(frames, {
+    duration: 300,
+    easing: "cubic-bezier(.2,.75,.2,1)",
+    fill: "forwards"
+  });
+
+  try {
+    await animation.finished;
+  } catch {
+    // The animation may be interrupted.
+  }
+
+  if (!expand) section.hidden = true;
+
+  animation.cancel();
+  entry.animating = false;
+
+  requestSectionParallax();
+}
+
+// Update folding titles when the language changes.
+function updateSectionFoldLabels() {
+  const language = route.language === "zh" ? "zh" : "en";
+
+  sectionFolds.forEach((entry) => {
+    entry.title.textContent =
+      entry.definition[language];
+  });
+}
+
+// Restore collapsed sections when following
+// Rules / FAQ / Past Problems navigation links.
+function openLinkedSection(sectionId) {
+  const entry = sectionFolds.find(
+    (item) => item.section.id === sectionId
+  );
+
+  if (entry && entry.section.hidden) {
+    setSectionExpanded(entry, true, false);
+    return true;
+  }
+
+  return false;
+}
+
+// Light scroll parallax.
+// Uses the CSS translate property to avoid overriding
+// existing transform animations.
+function updateSectionParallax() {
+  foldScrollFrame = 0;
+
+  if (reducedMotion.matches) return;
+
+  const visibleSections = sectionFolds.filter((entry) => {
+    const article = entry.section.closest("[data-screen]");
+
+    return (
+      article &&
+      !article.hidden &&
+      !entry.section.hidden
+    );
+  });
+
+  visibleSections.forEach((entry, index) => {
+    const section = entry.section;
+    const rect = section.getBoundingClientRect();
+    const viewport = window.innerHeight || 1;
+
+    if (rect.bottom < 0 || rect.top > viewport) {
+      return;
+    }
+
+    const relativePosition =
+      (rect.top + rect.height / 2 - viewport / 2) /
+      viewport;
+
+    const depth = 4 + (index % 3) * 2;
+
+    const shift = Math.max(
+      -10,
+      Math.min(10, -relativePosition * depth)
+    );
+
+    section.style.setProperty(
+      "--fold-parallax-y",
+      `${shift.toFixed(1)}px`
+    );
+    entry.button.style.setProperty(
+  "--fold-parallax-y",
+  `${shift.toFixed(1)}px`
+);
+  });
+}
+
+function requestSectionParallax() {
+  if (foldScrollFrame) return;
+
+  foldScrollFrame = requestAnimationFrame(
+    updateSectionParallax
+  );
+}
+
+// Open Rules sections before normal navigation runs.
+document.addEventListener(
+  "click",
+  (event) => {
+    const link = event.target.closest(
+      "a[data-section]"
+    );
+
+    if (link) {
+      openLinkedSection(link.dataset.section);
+    }
+  },
+  true
+);
+
+// Handle route changes, including browser back/forward.
+window.addEventListener("hashchange", () => {
+  updateSectionFoldLabels();
+
+  const current = parseRoute(
+    window.location.hash,
+    route.language
+  );
+
+  if (current.page === "rules" && current.section) {
+    const wasClosed = openLinkedSection(current.section);
+
+    if (wasClosed) {
+      requestAnimationFrame(() => {
+        document.getElementById(
+          current.section
+        )?.scrollIntoView({
+          behavior: reducedMotion.matches
+            ? "instant"
+            : "smooth",
+          block: "start"
+        });
+      });
+    }
+  }
+
+  requestSectionParallax();
+});
+
+window.addEventListener(
+  "scroll",
+  requestSectionParallax,
+  { passive: true }
+);
+
+window.addEventListener(
+  "resize",
+  requestSectionParallax
+);
+
+// Start the enhancement after the original site setup.
+initSectionFolds();
+
+/* ==========================================
+   INERTIAL TEXT SCROLL LAG
+   ========================================== */
+
+function initTextScrollLag() {
+
+  // Text elements that will have inertia.
+  const selectors = [
+
+    // HOME
+    '[data-screen="home"] .hero h1',
+    '[data-screen="home"] .hero-description',
+    '[data-screen="home"] .section-heading',
+    '[data-screen="home"] .track-caption',
+    '[data-screen="home"] .awards-section > h2',
+    '[data-screen="home"] .awards-section > p',
+
+    // RULES
+    '[data-screen="rules"] .selected-track',
+    '[data-screen="rules"] .selected-track-role',
+    '[data-screen="rules"] .selected-track-description',
+    '[data-screen="rules"] .rule-grid > div',
+    '[data-screen="rules"] #faq summary',
+    '[data-screen="rules"] #past .past-section > div',
+
+    // ABOUT
+    '[data-screen="about"] .story-timeline li',
+    '[data-screen="about"] .person-card h4',
+    '[data-screen="about"] .person-bio'
+  ];
+
+  const elements = [
+    ...document.querySelectorAll(
+      selectors.join(", ")
+    )
+  ];
+
+  elements.forEach(element => {
+    element.classList.add("scroll-lag-text");
+  });
+
+  const motionQuery = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  let smoothY = window.scrollY;
+  let animationFrame = 0;
+
+  // Adjust these two values for the effect.
+  const followSpeed = 0.10;
+  const lagStrength = 0.25;
+  const maxLag = 20;
+
+  function resetLag() {
+    elements.forEach(element => {
+      element.style.removeProperty(
+        "--scroll-lag-y"
+      );
+    });
+  }
+
+  function animateLag() {
+    animationFrame = 0;
+
+    if (motionQuery.matches) {
+      smoothY = window.scrollY;
+      resetLag();
+      return;
+    }
+
+    const actualY = window.scrollY;
+
+    const difference = actualY - smoothY;
+
+    // Gradually follow the real scroll position.
+    smoothY += difference * followSpeed;
+
+    // Translate scroll difference into text lag.
+    const offset = Math.max(
+      -maxLag,
+      Math.min(maxLag, difference * lagStrength)
+    );
+
+    elements.forEach((element, index) => {
+
+      const page = element.closest(
+        "[data-screen]"
+      );
+
+      const panel = element.closest(
+        ".section-fold-target"
+      );
+
+      // Ignore hidden pages and collapsed panels.
+      if (
+        !page ||
+        page.hidden ||
+        (panel && panel.hidden)
+      ) {
+        element.style.removeProperty(
+          "--scroll-lag-y"
+        );
+        return;
+      }
+
+      // Slightly different lag for each text group.
+      const depth = 0.75 + (index % 3) * 0.12;
+
+      const y = offset * depth;
+
+      element.style.setProperty(
+        "--scroll-lag-y",
+        `${y.toFixed(2)}px`
+      );
+
+    });
+
+    // Continue until the text catches up.
+    if (Math.abs(difference) > 0.15) {
+      animationFrame = requestAnimationFrame(
+        animateLag
+      );
+    } else {
+      smoothY = window.scrollY;
+      resetLag();
+    }
+  }
+
+  function requestLagAnimation() {
+    if (animationFrame) return;
+
+    animationFrame = requestAnimationFrame(
+      animateLag
+    );
+  }
+
+  // Native scrolling is preserved.
+  window.addEventListener(
+    "scroll",
+    requestLagAnimation,
+    { passive: true }
+  );
+
+  // Reset when switching pages.
+  window.addEventListener("hashchange", () => {
+    smoothY = window.scrollY;
+    resetLag();
+  });
+
+  // Reset if reduced motion is enabled.
+  motionQuery.addEventListener?.("change", () => {
+    if (motionQuery.matches) {
+      smoothY = window.scrollY;
+      resetLag();
+    }
+  });
+}
+
+// Initialise once.
+initTextScrollLag();
