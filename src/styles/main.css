@@ -271,3 +271,420 @@ button,a { touch-action:manipulation; }
 }
 @media(pointer:coarse) { #app .language { height:52px; } }
 @media(prefers-reduced-motion:reduce) { #app .language-thumb,#app .language button { transition:none; } }
+
+/* =====================================
+   ABOUT — TEAM DIRECTORY
+   ===================================== */
+
+.team-section .team-directory {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.team-directory-header {
+  margin-bottom: 38px;
+}
+
+.team-directory-header h2 {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.team-directory-header p {
+  margin: 0;
+  color: #61758f;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Group titles */
+
+.team-group + .team-group {
+  margin-top: 48px;
+}
+
+.team-group-title {
+  margin: 0 0 20px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #183b68;
+  letter-spacing: -0.02em;
+}
+
+/* Grid layout */
+
+.team-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.team-grid-academic {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.team-grid-members {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Base card design */
+
+.person-card {
+  position: relative;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+
+  border: 1px solid rgba(64, 112, 171, 0.18);
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(235, 242, 252, 0.86)
+  );
+
+  box-shadow: 0 8px 26px rgba(30, 65, 111, 0.05);
+  backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.35s cubic-bezier(.2, .8, .2, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease;
+}
+
+/* Soft glow layer */
+
+.person-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 85% 0%,
+    rgba(104, 164, 241, 0.22),
+    transparent 65%
+  );
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+/* Animated bottom accent */
+
+.person-card::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 0;
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    #2760ac,
+    #80baff
+  );
+
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+/* Hover interaction */
+
+.person-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(66, 122, 207, 0.5);
+  box-shadow:
+    0 18px 42px rgba(30, 70, 130, 0.13),
+    0 4px 12px rgba(30, 70, 130, 0.04);
+}
+
+.person-card:hover::before {
+  opacity: 1;
+}
+
+.person-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Card content */
+
+.person-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.person-card h4 {
+  margin: 0;
+  color: #183b68;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+/* Initial avatars */
+
+.person-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+
+  background: #e2ecfa;
+  color: #24518b;
+
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  transition:
+    transform 0.35s ease,
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+.person-card:hover .person-avatar {
+  transform: translateY(-3px) rotate(-5deg);
+  background: #2459a0;
+  color: #fff;
+}
+
+/* Academic Support cards */
+
+.academic-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px;
+  min-height: 120px;
+}
+
+/* Steven's featured card */
+
+.person-card-featured {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  align-items: start;
+  gap: 26px;
+
+  padding: 30px;
+  margin-bottom: 18px;
+
+  background: linear-gradient(
+    120deg,
+    rgba(231, 240, 253, 0.98),
+    rgba(255, 255, 255, 0.96)
+  );
+}
+
+.person-avatar-large {
+  width: 90px;
+  height: 90px;
+  border-radius: 24px;
+  font-size: 27px;
+}
+
+.featured-person-content {
+  min-width: 0;
+}
+
+.featured-person-content h4 {
+  font-size: clamp(20px, 2.5vw, 27px);
+  letter-spacing: -0.025em;
+}
+
+/* Reserved biography area */
+
+.person-bio {
+  box-sizing: border-box;
+  margin: 18px 0 0;
+  padding: 20px 22px;
+  min-height: 104px;
+
+  border-radius: 14px;
+  border-left: 3px solid #86b4ed;
+
+  background: rgba(255, 255, 255, 0.66);
+  color: #546982;
+
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+/* Other members */
+
+.member-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 24px;
+  min-height: 168px;
+}
+
+/* Tablet adaptation */
+
+@media (max-width: 800px) {
+  .team-grid-members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .academic-card {
+    padding: 20px;
+  }
+
+  .person-card-featured {
+    gap: 20px;
+    padding: 24px;
+  }
+}
+
+/* Mobile adaptation */
+
+@media (max-width: 560px) {
+  .team-grid-academic,
+  .team-grid-members {
+    grid-template-columns: 1fr;
+  }
+
+  .team-group + .team-group {
+    margin-top: 36px;
+  }
+
+  .person-card-featured {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .member-card {
+    min-height: 126px;
+  }
+
+  .team-directory-header {
+    margin-bottom: 28px;
+  }
+}
+
+/* Accessibility: reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .person-card,
+  .person-card::before,
+  .person-card::after,
+  .person-avatar {
+    transition: none;
+  }
+
+  .person-card:hover {
+    transform: none;
+  }
+
+  .person-card:hover .person-avatar {
+    transform: none;
+  }
+}
+
+/* =====================================
+   TEAM CARD BIOGRAPHY LAYOUT
+   ===================================== */
+
+/* Biography content wrapper */
+.person-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Academic Support cards */
+.team-section .academic-card {
+  align-items: flex-start;
+  min-height: 190px;
+}
+
+.team-section .academic-card .person-bio {
+  margin-top: 14px;
+  min-height: 94px;
+}
+
+/* Regular organising team cards */
+.team-section .member-card {
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 14px;
+  min-height: 250px;
+}
+
+.team-section .member-card .person-avatar {
+  flex-shrink: 0;
+}
+
+.team-section .member-card h4 {
+  min-height: 48px;
+}
+
+/* Introduction boxes */
+.team-section .person-bio {
+  box-sizing: border-box;
+  width: 100%;
+  overflow-wrap: anywhere;
+  line-height: 1.75;
+}
+
+/* Member biography space */
+.team-section .member-card .person-bio {
+  margin: 0;
+  padding: 14px 16px;
+  min-height: 105px;
+  flex: 1;
+
+  background: rgba(255, 255, 255, 0.65);
+  border-left: 3px solid #86b4ed;
+  border-radius: 12px;
+
+  font-size: 13px;
+  color: #546982;
+}
+
+/* Larger space for Steven */
+.team-section .person-card-featured .person-bio {
+  min-height: 150px;
+  margin-top: 20px;
+}
+
+/* Gentle biography highlight on hover */
+.team-section .person-card:hover .person-bio {
+  background: rgba(255, 255, 255, 0.92);
+  border-left-color: #2760ac;
+}
+
+@media (max-width: 560px) {
+  .team-section .academic-card {
+    align-items: flex-start;
+  }
+
+  .team-section .member-card {
+    min-height: 210px;
+  }
+
+  .team-section .member-card h4 {
+    min-height: 0;
+  }
+
+  .team-section .person-card-featured .person-bio {
+    min-height: 120px;
+  }
+}
+
