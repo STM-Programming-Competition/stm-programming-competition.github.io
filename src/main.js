@@ -558,62 +558,138 @@ initSectionFolds();
    INERTIAL TEXT SCROLL LAG
    ========================================== */
 
+
+/* ======================================
+   SMOOTH TEXT SCROLL LAG
+   ====================================== */
+
 function initTextScrollLag() {
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
 
-  // Text elements that will have inertia.
+  // Text moves; cards and borders stay still.
   const selectors = [
-
-    // HOME
     '[data-screen="home"] .hero h1',
     '[data-screen="home"] .hero-description',
-    '[data-screen="home"] .section-heading',
-    '[data-screen="home"] .track-caption',
-    '[data-screen="home"] .awards-section > h2',
-    '[data-screen="home"] .awards-section > p',
+    '[data-screen="home"] .section-heading h2',
+    '[data-screen="home"] .awards-section h2',
 
-    // RULES
+    '[data-screen="rules"] .subpage-title h1',
+    '[data-screen="rules"] .subpage-title p',
     '[data-screen="rules"] .selected-track',
-    '[data-screen="rules"] .selected-track-role',
     '[data-screen="rules"] .selected-track-description',
-    '[data-screen="rules"] .rule-grid > div',
-    '[data-screen="rules"] #faq summary',
-    '[data-screen="rules"] #past .past-section > div',
+    '[data-screen="rules"] .rule-grid dt',
+    '[data-screen="rules"] .rule-grid dd',
 
-    // ABOUT
-    '[data-screen="about"] .story-timeline li',
+    '[data-screen="about"] .subpage-title h1',
+    '[data-screen="about"] .story-timeline h3',
+    '[data-screen="about"] .story-timeline p',
     '[data-screen="about"] .person-card h4',
     '[data-screen="about"] .person-bio'
   ];
 
   const elements = [
-    ...document.querySelectorAll(
-      selectors.join(", ")
-    )
+    ...document.querySelectorAll(selectors.join(","))
   ];
 
   elements.forEach(element => {
     element.classList.add("scroll-lag-text");
   });
 
-  const motionQuery = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  );
+  let previousScroll = window.scrollY;
+  let velocity = 0;
+  let displacement = 0;
+  let frame = 0;
 
-  let smoothY = window.scrollY;
-  let animationFrame = 0;
+  // Animation parameters
+  const strength = 0.35;
+  const damping = 0.78;
+  const follow = 0.18;
+  const maxOffset = 14;
 
-  // Adjust these two values for the effect.
-  const followSpeed = 0.10;
-  const lagStrength = 0.25;
-  const maxLag = 20;
+  function reset() {
+    velocity = 0;
+    displacement = 0;
+    previousScroll = window.scrollY;
 
-  function resetLag() {
     elements.forEach(element => {
-      element.style.removeProperty(
-        "--scroll-lag-y"
-      );
+      element.style.removeProperty("--scroll-lag-y");
     });
   }
+
+  function animate() {
+    frame = 0;
+
+    if (reducedMotion.matches) {
+      reset();
+      return;
+    }
+
+    velocity *= damping;
+    displacement += (velocity - displacement) * follow;
+
+    const offset = Math.max(
+      -maxOffset,
+      Math.min(maxOffset, displacement)
+    );
+
+    elements.forEach(element => {
+      const page = element.closest("[data-screen]");
+      const panel = element.closest(".section-fold-target");
+
+      if (page?.hidden || panel?.hidden) {
+        element.style.removeProperty("--scroll-lag-y");
+        return;
+      }
+
+      const isHeading = element.matches("h1,h2,h3,h4");
+      const depth = isHeading ? 1 : 0.6;
+
+      element.style.setProperty(
+        "--scroll-lag-y",
+        `${(offset * depth).toFixed(2)}px`
+      );
+    });
+
+    if (
+      Math.abs(velocity) > 0.05 ||
+      Math.abs(displacement) > 0.05
+    ) {
+      frame = requestAnimationFrame(animate);
+    } else {
+      reset();
+    }
+  }
+
+  function onScroll() {
+    const currentScroll = window.scrollY;
+    const delta = currentScroll - previousScroll;
+    previousScroll = currentScroll;
+
+    if (reducedMotion.matches) return;
+
+    velocity = Math.max(
+      -28,
+      Math.min(28, velocity + delta * strength)
+    );
+
+    if (!frame) {
+      frame = requestAnimationFrame(animate);
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, {
+    passive: true
+  });
+
+  window.addEventListener("hashchange", reset);
+  reducedMotion.addEventListener?.("change", reset);
+}
+
+// Initialise only once
+initTextScrollLag();
+
 
   function animateLag() {
     animationFrame = 0;
@@ -710,7 +786,189 @@ function initTextScrollLag() {
       resetLag();
     }
   });
+/* ==========================================
+   UNIFIED TEXT SCROLL LAG — FULL SITE
+   ========================================== */
+
+function initUnifiedTextLag() {
+  const motionQuery = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  const selector = [
+    // fold titles
+    '.section-fold-title',
+
+    // HOME
+    '[data-screen="home"] .hero h1',
+    '[data-screen="home"] .hero-description',
+    '[data-screen="home"] .section-heading h2',
+    '[data-screen="home"] .section-heading p',
+    '[data-screen="home"] .track-caption h3',
+    '[data-screen="home"] .track-caption .track-role',
+    '[data-screen="home"] .track-caption .track-description',
+    '[data-screen="home"] .track-caption .track-arrow',
+    '[data-screen="home"] .awards-section h2',
+    '[data-screen="home"] .awards-section p',
+    '[data-screen="home"] .awards-section .inline-link',
+
+    // RULES
+    '[data-screen="rules"] .subpage-title h1',
+    '[data-screen="rules"] .subpage-title p',
+    '[data-screen="rules"] .selected-track',
+    '[data-screen="rules"] .selected-track-role',
+    '[data-screen="rules"] .selected-track-description',
+    '[data-screen="rules"] .rule-grid dt',
+    '[data-screen="rules"] .rule-grid dd',
+    '[data-screen="rules"] #faq summary',
+    '[data-screen="rules"] #faq details p',
+    '[data-screen="rules"] #past .past-section h2',
+    '[data-screen="rules"] #past .past-section p',
+    '[data-screen="rules"] #past .past-section .cta',
+
+    // ABOUT
+    '[data-screen="about"] .subpage-title h1',
+    '[data-screen="about"] .subpage-title p',
+    '[data-screen="about"] .story-section > h2',
+    '[data-screen="about"] .story-timeline h3',
+    '[data-screen="about"] .story-timeline p',
+    '[data-screen="about"] .team-directory-header h2',
+    '[data-screen="about"] .team-directory-header p',
+    '[data-screen="about"] .team-group-title',
+    '[data-screen="about"] .person-card h4',
+    '[data-screen="about"] .person-bio'
+  ].join(',');
+
+  let targets = [];
+  let lastScroll = window.scrollY;
+  let targetOffset = 0;
+  let currentOffset = 0;
+  let frame = 0;
+
+  // 统一参数：全站所有文字同一套速度
+  const strength = 0.22;
+  const follow = 0.16;
+  const damping = 0.80;
+  const maxOffset = 14;
+
+  function collectTargets() {
+    targets = [...document.querySelectorAll(selector)].filter((element) => {
+      const page = element.closest('[data-screen]');
+      return !!page;
+    });
+
+    targets.forEach((element) => {
+      element.classList.add('st-unified-lag');
+    });
+  }
+
+  function isVisibleTarget(element) {
+    const page = element.closest('[data-screen]');
+    const panel = element.closest('.section-fold-target');
+
+    if (!page || page.hidden) return false;
+    if (panel && panel.hidden) return false;
+
+    return true;
+  }
+
+  function applyOffset(value) {
+    targets.forEach((element) => {
+      if (!isVisibleTarget(element)) {
+        element.style.removeProperty('--st-unified-lag-y');
+        return;
+      }
+
+      element.style.setProperty(
+        '--st-unified-lag-y',
+        `${value.toFixed(2)}px`
+      );
+    });
+  }
+
+  function reset() {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    targetOffset = 0;
+    currentOffset = 0;
+    lastScroll = window.scrollY;
+    applyOffset(0);
+  }
+
+  function tick() {
+    frame = 0;
+
+    targetOffset *= damping;
+    currentOffset += (targetOffset - currentOffset) * follow;
+
+    applyOffset(currentOffset);
+
+    if (
+      Math.abs(targetOffset) > 0.05 ||
+      Math.abs(currentOffset) > 0.05
+    ) {
+      frame = requestAnimationFrame(tick);
+    } else {
+      reset();
+    }
+  }
+
+  function onScroll() {
+    if (motionQuery.matches) return;
+
+    const now = window.scrollY;
+    const delta = now - lastScroll;
+    lastScroll = now;
+
+    targetOffset = Math.max(
+      -maxOffset,
+      Math.min(maxOffset, targetOffset + delta * strength)
+    );
+
+    if (!frame) {
+      frame = requestAnimationFrame(tick);
+    }
+  }
+
+  function refreshTargets() {
+    collectTargets();
+    applyOffset(0);
+  }
+
+  // 初次收集
+  collectTargets();
+  applyOffset(0);
+
+  // 滚动监听
+  window.addEventListener('scroll', onScroll, {
+    passive: true
+  });
+
+  // 路由切换后重新抓取
+  window.addEventListener('hashchange', () => {
+    refreshTargets();
+    reset();
+  });
+
+  // 语言切换 / 动态插入折叠标题后重新抓取
+  const observer = new MutationObserver(() => {
+    refreshTargets();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  motionQuery.addEventListener?.('change', () => {
+    if (motionQuery.matches) {
+      reset();
+    } else {
+      refreshTargets();
+    }
+  });
 }
 
+initUnifiedTextLag();
+
 // Initialise once.
-initTextScrollLag();
