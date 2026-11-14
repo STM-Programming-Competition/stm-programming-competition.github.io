@@ -1386,3 +1386,412 @@ button,a { touch-action:manipulation; }
   }
 }
 
+/* ======================================
+   RESTORE TEXT SCROLL LAG
+   ====================================== */
+
+.website .scroll-lag-text {
+  translate: 0 var(--scroll-lag-y, 0px);
+}
+
+/* Cards and borders remain stationary */
+.section-fold-target,
+.section-fold-toggle {
+  translate: none !important;
+}
+
+/* Keep adequate space around animated text */
+[data-screen="rules"] .rule-grid > div {
+  padding: 24px !important;
+}
+
+[data-screen="about"] .story-timeline > li {
+  padding-bottom: 16px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .website .scroll-lag-text {
+    translate: none !important;
+  }
+}
+/* ==========================================
+   UNIFIED TEXT SCROLL LAG — STYLE
+   ========================================== */
+
+.website .st-unified-lag {
+  translate: 0 var(--st-unified-lag-y, 0px);
+  will-change: transform;
+}
+
+/* 这些地方明确允许位移，避免某些元素不响应 */
+.website .section-fold-title,
+.website .track-caption h3,
+.website .track-caption .track-role,
+.website .track-caption .track-description,
+.website .track-caption .track-arrow,
+.website .section-heading h2,
+.website .section-heading p,
+.website .awards-section h2,
+.website .awards-section p,
+.website .awards-section .inline-link,
+.website .subpage-title h1,
+.website .subpage-title p,
+.website .selected-track,
+.website .selected-track-role,
+.website .selected-track-description,
+.website .rule-grid dt,
+.website .rule-grid dd,
+.website #faq summary,
+.website #faq details p,
+.website .story-section > h2,
+.website .story-timeline h3,
+.website .story-timeline p,
+.website .team-directory-header h2,
+.website .team-directory-header p,
+.website .team-group-title,
+.website .person-card h4,
+.website .person-bio {
+  will-change: transform;
+}
+
+/* 卡片本身不漂，只让文字漂 */
+.section-fold-target,
+.section-fold-toggle {
+  translate: none !important;
+}
+
+/* 避免标题被裁切 */
+.subpage-title,
+.story-section,
+.team-section,
+.tracks-section,
+.awards-section,
+.rules-section,
+.faq-section,
+.past-section {
+  overflow: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .website .st-unified-lag {
+    translate: none !important;
+    will-change: auto;
+  }
+}
+
+/* ==========================================
+   ST WEBSITE — GLOBAL ALIGNMENT FIX
+   ========================================== */
+
+/* 1. Shared layout dimensions */
+
+.website {
+  --st-layout-width: 1000px;
+  --st-section-gap: 24px;
+  --st-panel-radius: 20px;
+}
+
+/* 2. Header, partner logos and page content
+   use exactly the same width */
+
+.website .site-header,
+.website .top-partners,
+.website .page-content {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  max-width: var(--st-layout-width) !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Remove extra horizontal padding
+   from the outer content container */
+
+.website .page-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 3. All three page containers */
+
+.website .page-content > article[data-screen] {
+  box-sizing: border-box;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 4. Align headings, accordion bars,
+   content panels and navigation */
+
+.website .page-content [data-screen]
+  > .section-fold-toggle,
+
+.website .page-content [data-screen]
+  > .section-fold-target,
+
+.website .page-content [data-screen]
+  > .subpage-title,
+
+.website .page-content [data-screen]
+  > .rules-navigation {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  left: auto !important;
+  right: auto !important;
+}
+
+/* 5. Unified accordion heading dimensions */
+
+.website [data-screen] > .section-fold-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 66px;
+
+  margin-top: 20px !important;
+  margin-bottom: 12px !important;
+
+  padding: 18px 26px !important;
+
+  border-radius: 18px !important;
+}
+
+/* 6. Unified spacing below panels */
+
+.website [data-screen] > .section-fold-target {
+  margin-top: 0 !important;
+  margin-bottom: var(--st-section-gap) !important;
+
+  border-radius: var(--st-panel-radius);
+}
+
+/* 7. Keep panels stationary.
+   Only inner text uses scroll lag. */
+
+.website [data-screen] > .section-fold-toggle,
+.website [data-screen] > .section-fold-target {
+  translate: none !important;
+  transform: none !important;
+}
+
+/* 8. Rules and About poster headings */
+
+.website [data-screen="rules"] > .subpage-title,
+.website [data-screen="about"] > .subpage-title {
+  margin-top: 16px !important;
+  margin-bottom: 20px !important;
+}
+
+/* 9. Rules navigation spacing */
+
+.website [data-screen="rules"] > .rules-navigation {
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+}
+
+/* 10. Preserve collapsed sections */
+
+.website [data-screen][hidden],
+.website .section-fold-target[hidden] {
+  display: none !important;
+}
+
+/* 11. Responsive layout */
+
+@media (max-width: 768px) {
+
+  .website .site-header,
+  .website .top-partners,
+  .website .page-content {
+    width: calc(100% - 32px) !important;
+    max-width: none !important;
+  }
+
+  .website [data-screen] > .section-fold-toggle {
+    min-height: 58px;
+
+    padding: 15px 18px !important;
+    margin-top: 16px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .website [data-screen] > .section-fold-target {
+    margin-bottom: 18px !important;
+  }
+
+  .website {
+    --st-panel-radius: 16px;
+  }
+}
+
+/* ==========================================
+   RULES POSTER — BACKGROUND CROP FIX
+   Show tower spire / Hide bottom circuit rings
+   ========================================== */
+
+.website [data-screen="rules"] .subpage-title {
+  /* 保留原来的海报和深蓝色蒙版 */
+
+  /* 第一层是渐变，第二层是海报图片 */
+  background-position:
+    center center,
+    center 38% !important;
+
+  background-size:
+    cover,
+    cover !important;
+
+  background-repeat: no-repeat !important;
+
+  /* 稍微增加标题区高度，让塔尖展示更完整 */
+  min-height: 320px;
+}
+/* ==========================================
+   RULES NAVIGATION — CENTERED & EVEN SPACING
+   ========================================== */
+
+[data-screen="rules"] .rules-navigation {
+  display: flex;
+  justify-content: center;   /* 整体居中 */
+  align-items: center;
+  gap: 56px;                 /* 每个项目之间等间距 */
+  flex-wrap: wrap;
+
+  width: 100%;
+  margin: 18px auto 36px !important;
+  padding: 0;
+
+  border: none;
+}
+
+[data-screen="rules"] .rules-navigation a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 110px;          /* 让每项宽度更统一 */
+  text-align: center;
+
+  color: #1f5aa6;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+
+  transition: all 0.25s ease;
+}
+
+[data-screen="rules"] .rules-navigation a:hover {
+  color: #0d3f85;
+  border-bottom: 2px solid #1f5aa6;
+}
+
+[data-screen="rules"] .rules-navigation a.active,
+[data-screen="rules"] .rules-navigation a[aria-current="page"] {
+  color: #0d3f85;
+  border-bottom: 2px solid #1f5aa6;
+}
+
+/* 手机端 */
+@media (max-width: 768px) {
+  [data-screen="rules"] .rules-navigation {
+    gap: 20px;
+    margin: 14px auto 24px !important;
+  }
+
+  [data-screen="rules"] .rules-navigation a {
+    min-width: 88px;
+    font-size: 14px;
+  }
+}
+/* ==========================================
+   ABOUT TEAM CARDS — NAME / BIO SPACING FIX
+   ========================================== */
+
+/* 普通成员卡片：名字和简介框拉开一点 */
+[data-screen="about"] .person-card h4 {
+  margin: 0 0 18px !important;
+  line-height: 1.3;
+}
+
+/* 简介框本身往下留一点空间，并增加内部留白 */
+[data-screen="about"] .person-bio {
+  margin-top: 10px !important;
+  padding: 18px 22px !important;
+  line-height: 1.75;
+  border-radius: 18px;
+}
+
+/* 让名字、简介区整体更松一点 */
+[data-screen="about"] .person-card {
+  padding: 26px 24px !important;
+}
+
+/* 学术支持两张卡片 */
+[data-screen="about"] .team-grid .person-card h4 {
+  margin-bottom: 20px !important;
+}
+
+/* Steven 这张大卡片单独再松一点 */
+[data-screen="about"] .person-card--lead h4,
+[data-screen="about"] .team-lead-card h4,
+[data-screen="about"] .person-card.lead h4 {
+  margin-bottom: 22px !important;
+}
+
+[data-screen="about"] .person-card--lead .person-bio,
+[data-screen="about"] .team-lead-card .person-bio,
+[data-screen="about"] .person-card.lead .person-bio {
+  margin-top: 12px !important;
+  padding: 20px 24px !important;
+  min-height: 140px;
+}
+
+/* 小卡片下面的简介框也不要太贴 */
+[data-screen="about"] .team-grid .person-bio {
+  min-height: 92px;
+}
+
+/* 如果卡片内部有名字和内容的右侧主体区域，也顺便拉开 */
+[data-screen="about"] .person-content,
+[data-screen="about"] .person-main,
+[data-screen="about"] .person-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+  [data-screen="about"] .person-card {
+    padding: 20px 18px !important;
+  }
+
+  [data-screen="about"] .person-card h4 {
+    margin-bottom: 14px !important;
+  }
+
+  [data-screen="about"] .person-bio {
+    margin-top: 8px !important;
+    padding: 14px 16px !important;
+  }
+}
