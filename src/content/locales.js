@@ -145,7 +145,7 @@ export const translations = {
     "rulesTitle": "Know the rules.<br>Take the challenge.",
     "rulesSubtitle": "Everything to know before you take part.",
     "eligibility": "Eligibility",
-    "eligibilityValue": "Aimed at first-year IP students at Ge Institute or other first-year beginners learning C.",
+    "eligibilityValue": "Aimed at first-year IP students at Glasgow college or other first-year beginners learning C.",
     "team": "Teams",
     "teamValue": "Individual.",
     "format": "Format",
